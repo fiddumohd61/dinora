@@ -1,0 +1,22 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>All Restaurants</h1>
+
+<div class="restaurant-grid">
+
+<div class="restaurant-card">
+    <img src="{% static 'images/restaurant1.jpg' %}">
+    <h3>Hotel Paradise</h3>
+    <p>⭐⭐⭐⭐⭐</p>
+</div>
+
+<div class="restaurant-card">
+    <img src="{% static 'images/restaurant2.jpg' %}">
+    <h3>Food Court</h3>
+    <p>⭐⭐⭐⭐⭐</p>
+</div>
+
+</div>
+{% endblock %}
