@@ -2,20 +2,42 @@
 {% load static %}
 
 {% block content %}
-<h1>All Restaurants</h1>
+<h1>Restaurants</h1>
 
 <div class="restaurant-grid">
 
 <div class="restaurant-card">
     <img src="{% static 'foodapp/images/restaurant1.jpg' %}">
     <h3>Hotel Paradise</h3>
-    <p>⭐⭐⭐⭐⭐</p>
+    <p>⭐ Rating:4.5/5 </p>
+    <p>⏱ Delivery Time: {{ 25 }} mins</p>
+    <p> Secunderabad </p>
+     {% if restaurant.is_open %}
+        <p style="color:green;">Open</p>
+    {% else %}
+        <p style="color:red;">Closed</p>
+    {% endif %}
+
+    <a href="{% url 'hotel_paradise_menu' %}">
+    <button class="menu-btn">View Menu</button>
+    </a>
+    
+
 </div>
 
 <div class="restaurant-card">
     <img src="{% static 'foodapp/images/restaurant2.jpg' %}">
     <h3>Food Court</h3>
-    <p>⭐⭐⭐⭐⭐</p>
+    <p>⭐ Rating:4.3/5</p>
+    <p>⏱ Delivery Time: {{ 40 }} mins</p>
+    <p>Madhapur </p>
+    {% if restaurant.is_open %}
+        <p style="color:green;">Open</p>
+    {% else %}
+        <p style="color:red;">Closed</p>
+    {% endif %}
+    <button class="menu-btn">View Menu</button>
+
 </div>
 
 </div>

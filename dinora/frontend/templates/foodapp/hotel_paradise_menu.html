@@ -1,0 +1,75 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/hotel_paradise_menu.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<h2>Hotel Paradise Menu</h2>
+
+<div class="menu-card">
+    <div class="menu-info">
+         <img src="{% static 'foodapp/images/biryani.jpg' %}"
+         alt="Chicken Biryani"
+         class="food-image">
+        <h3>Chicken Dum Biryani</h3>
+        <p>Authentic Hyderabadi dum biryani.</p>
+        <div class="food-meta">
+            <span class="price">₹299</span>
+            <span class="rating">⭐ 4.7</span>
+        </div>
+    </div>
+
+    <div class="menu-actions">
+        <label>Qty</label>
+        <input type="number" value="1" min="1">
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>
+
+<div class="menu-card">
+    <div class="menu-info">
+        <h3>Mutton Biryani</h3>
+        <p>Hyderabadi mutton biryani.</p>
+        <span class="price">₹320</span>
+    </div>
+
+    <div class="menu-actions">
+        <label>Qty</label>
+        <input type="number" value="1" min="1">
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>
+
+<div class="menu-card">
+    <div class="menu-info">
+        <h3>Apricot delight</h3>
+        <p>Sweetnes overloaded.</p>
+        <span class="price">₹120</span>
+    </div>
+
+    <div class="menu-actions">
+        <label>Qty</label>
+        <input type="number" value="1" min="1">
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>
+
+<div class="menu-card">
+    <div class="menu-info">
+        <h3>Thumsup</h3>
+        <p>Taste the tundher.</p>
+        <span class="price">₹20</span>
+    </div>
+
+    <div class="menu-actions">
+        <label>Qty</label>
+        <input type="number" value="1" min="1">
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>
+
+{% endblock %}
