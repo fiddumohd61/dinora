@@ -102,16 +102,17 @@ body{
 
 /* HERO */
 
-.hero{
-    height:650px;
-    background:url("/static/images/hero.jpg");
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
 
+.hero{
+    height: 650px;
+    background-image: url("/static/foodapp/images/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .hero-content{
     background:rgba(0,0,0,0.60);
     color:white;
