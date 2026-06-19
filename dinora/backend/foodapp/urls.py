@@ -6,10 +6,14 @@ urlpatterns = [
     path('menu/', views.menu, name='menu'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
-    path('login/', views.login_view, name='login'),
-    path('register/', views.register_view, name='register'),
+    
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('restaurants/', views.restaurants, name='restaurants'),
+
+    path('hotel_paradise_menu/', views.hotel_paradise_menu, name='hotel_paradise_menu'),
+    path('food_court_menu/', views.food_court_menu, name='food_court_menu'),
+
+
     path('offers/', views.offers, name='offers'),
 ]
