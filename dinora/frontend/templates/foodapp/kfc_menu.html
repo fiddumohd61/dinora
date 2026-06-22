@@ -2,22 +2,46 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'foodapp/css/hotel_paradise_menu.css' %}">
+<link rel="stylesheet" href="{% static 'foodapp/css/kfc_menu.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<h2 class="page-title">Hotel Paradise Menu</h2>
+<h2 class="page-title">KFC Menu</h2>
 
 <div class="menu-card">
-    <img src="{% static 'foodapp/images/biryani.jpg' %}" alt="Chicken Biryani" class="food-image">
+    <img src="{% static 'foodapp/images/chicken_bucket.jpg' %}"
+         alt="Chicken Bucket"
+         class="food-image">
 
     <div class="menu-info">
-        <h3>Chicken Dum Biryani</h3>
-        <p>Authentic Hyderabadi dum biryani.</p>
+        <h3>Chicken Bucket</h3>
+        <p>Crispy and juicy fried chicken pieces served hot.</p>
 
         <div class="food-meta">
-            <span class="price">₹299</span>
+            <span class="price">₹499</span>
+            <span class="rating">⭐ 4.8</span>
+        </div>
+    </div>
+
+    <div class="menu-actions">
+        <label>Qty</label>
+        <input type="number" value="1" min="1">
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>
+
+<div class="menu-card">
+    <img src="{% static 'foodapp/images/zinger_burger.jpg' %}"
+         alt="Zinger Burger"
+         class="food-image">
+
+    <div class="menu-info">
+        <h3>Zinger Burger</h3>
+        <p>Crunchy chicken fillet burger with fresh veggies and mayo.</p>
+
+        <div class="food-meta">
+            <span class="price">₹199</span>
             <span class="rating">⭐ 4.7</span>
         </div>
     </div>
@@ -30,15 +54,17 @@
 </div>
 
 <div class="menu-card">
-    <img src="{% static 'foodapp/images/mutton_biryani.jpg' %}" alt="Mutton Biryani" class="food-image">
+    <img src="{% static 'foodapp/images/fries.jpg' %}"
+         alt="French Fries"
+         class="food-image">
 
     <div class="menu-info">
-        <h3>Mutton Biryani</h3>
-        <p>Traditional Hyderabadi mutton biryani.</p>
+        <h3>French Fries</h3>
+        <p>Golden crispy fries seasoned to perfection.</p>
 
         <div class="food-meta">
-            <span class="price">₹320</span>
-            <span class="rating">⭐ 4.8</span>
+            <span class="price">₹99</span>
+            <span class="rating">⭐ 4.6</span>
         </div>
     </div>
 
@@ -48,30 +74,7 @@
         <button class="cart-btn">Add to Cart</button>
     </div>
 </div>
-<div class="menu-card">
-    <img src="{% static 'foodapp/images/double_ka_meetha.jpg' %}"
-         alt="Double Ka Meetha"
-         class="food-image">
 
-    <div class="menu-info">
-        <h3>Double Ka Meetha</h3>
-        <p>Traditional Hyderabadi dessert made with bread, milk, dry fruits and saffron.</p>
-
-        <div class="food-meta">
-            <span class="price">₹120</span>
-            <span class="rating">⭐ 4.6</span>
-        </div>
-    </div>
-
-    <div class="menu-actions">
-        <label>Qty</label>
-        <input type="number" value="1" min="1">
-
-        <button class="cart-btn">
-            Add to Cart
-        </button>
-    </div>
-</div>
 <div class="menu-card">
     <img src="{% static 'foodapp/images/thumbsup_can.jpg' %}"
          alt="Thums Up"

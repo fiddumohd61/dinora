@@ -35,9 +35,13 @@ def hotel_paradise_menu(request):
         'restaurant_name': 'Hotel Paradise'
     })
 
-def food_court_menu(request):
-    return render(request, 'foodapp/menu_items.html', {
-        'restaurant_name': 'Food Court'
+def pizzahut_menu(request):
+    return render(request, 'foodapp/pizzahut_menu.html', {
+        'restaurant_name': 'pizzahut'
+    })
+def kfc_menu(request):
+    return render(request, 'foodapp/kfc_menu.html', {
+        'restaurant_name': 'kfc'
     })
 
 def offers(request):

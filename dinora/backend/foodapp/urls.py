@@ -12,8 +12,8 @@ urlpatterns = [
     path('restaurants/', views.restaurants, name='restaurants'),
 
     path('hotel_paradise_menu/', views.hotel_paradise_menu, name='hotel_paradise_menu'),
-    path('food_court_menu/', views.food_court_menu, name='food_court_menu'),
-
+    path('pizzahut_menu/', views.pizzahut_menu, name='pizzahut_menu'),
+    path('kfc_menu/', views.kfc_menu, name='kfc_menu'),
 
     path('offers/', views.offers, name='offers'),
 ]

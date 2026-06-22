@@ -2,22 +2,46 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'foodapp/css/hotel_paradise_menu.css' %}">
+<link rel="stylesheet" href="{% static 'foodapp/css/pizzahut_menu.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<h2 class="page-title">Hotel Paradise Menu</h2>
+<h2 class="page-title">PizzaHut Menu</h2>
 
 <div class="menu-card">
-    <img src="{% static 'foodapp/images/biryani.jpg' %}" alt="Chicken Biryani" class="food-image">
+    <img src="{% static 'foodapp/images/margherita_pizza.jpg' %}"
+         alt="Margherita Pizza"
+         class="food-image">
 
     <div class="menu-info">
-        <h3>Chicken Dum Biryani</h3>
-        <p>Authentic Hyderabadi dum biryani.</p>
+        <h3>Margherita Pizza</h3>
+        <p>Classic cheese pizza with fresh mozzarella and tomato sauce.</p>
 
         <div class="food-meta">
-            <span class="price">₹299</span>
+            <span class="price">₹249</span>
+            <span class="rating">⭐ 4.6</span>
+        </div>
+    </div>
+
+    <div class="menu-actions">
+        <label>Qty</label>
+        <input type="number" value="1" min="1">
+        <button class="cart-btn">Add to Cart</button>
+    </div>
+</div>
+
+<div class="menu-card">
+    <img src="{% static 'foodapp/images/veg_supreme_pizza.jpg' %}"
+         alt="Veg Supreme Pizza"
+         class="food-image">
+
+    <div class="menu-info">
+        <h3>Veg Supreme Pizza</h3>
+        <p>Loaded with capsicum, onion, corn, olives and cheese.</p>
+
+        <div class="food-meta">
+            <span class="price">₹399</span>
             <span class="rating">⭐ 4.7</span>
         </div>
     </div>
@@ -28,17 +52,18 @@
         <button class="cart-btn">Add to Cart</button>
     </div>
 </div>
-
 <div class="menu-card">
-    <img src="{% static 'foodapp/images/mutton_biryani.jpg' %}" alt="Mutton Biryani" class="food-image">
+    <img src="{% static 'foodapp/images/garlic_bread.jpg' %}"
+         alt="Garlic Bread"
+         class="food-image">
 
     <div class="menu-info">
-        <h3>Mutton Biryani</h3>
-        <p>Traditional Hyderabadi mutton biryani.</p>
+        <h3>Garlic Bread</h3>
+        <p>Freshly baked garlic bread topped with herbs and butter.</p>
 
         <div class="food-meta">
-            <span class="price">₹320</span>
-            <span class="rating">⭐ 4.8</span>
+            <span class="price">₹149</span>
+            <span class="rating">⭐ 4.5</span>
         </div>
     </div>
 
@@ -46,30 +71,6 @@
         <label>Qty</label>
         <input type="number" value="1" min="1">
         <button class="cart-btn">Add to Cart</button>
-    </div>
-</div>
-<div class="menu-card">
-    <img src="{% static 'foodapp/images/double_ka_meetha.jpg' %}"
-         alt="Double Ka Meetha"
-         class="food-image">
-
-    <div class="menu-info">
-        <h3>Double Ka Meetha</h3>
-        <p>Traditional Hyderabadi dessert made with bread, milk, dry fruits and saffron.</p>
-
-        <div class="food-meta">
-            <span class="price">₹120</span>
-            <span class="rating">⭐ 4.6</span>
-        </div>
-    </div>
-
-    <div class="menu-actions">
-        <label>Qty</label>
-        <input type="number" value="1" min="1">
-
-        <button class="cart-btn">
-            Add to Cart
-        </button>
     </div>
 </div>
 <div class="menu-card">
