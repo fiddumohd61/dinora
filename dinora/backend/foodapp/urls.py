@@ -16,4 +16,5 @@ urlpatterns = [
     path('kfc_menu/', views.kfc_menu, name='kfc_menu'),
 
     path('offers/', views.offers, name='offers'),
+    path('search/',views.search,name='search'),
 ]

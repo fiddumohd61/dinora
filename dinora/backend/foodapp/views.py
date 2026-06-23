@@ -46,3 +46,40 @@ def kfc_menu(request):
 
 def offers(request):
     return render(request, 'foodapp/offers.html')
+from django.shortcuts import render, redirect
+
+def search(request):
+    query = request.GET.get('q', '').lower()
+
+    if 'paradise' in query:
+        return redirect('hotel_paradise_menu')
+
+    elif 'pizza hut' in query or 'pizzahut' in query:
+        return redirect('pizzahut_menu')
+
+    elif 'kfc' in query:
+        return redirect('kfc_menu')
+
+    elif 'chicken dum biryani' in query:
+        return redirect('hotel_paradise_menu')
+
+    elif 'mutton biryani' in query:
+        return redirect('hotel_paradise_menu')
+
+    elif 'double ka meetha' in query:
+        return redirect('hotel_paradise_menu')
+
+    elif 'thumbs up' in query:
+        return redirect('hotel_paradise_menu')
+    elif 'margherita pizza' in query:
+        return redirect('pizzahut_menu')
+
+    elif 'veg supreme pizza' in query:
+       return redirect('pizzahut_menu')
+
+    elif 'garlic bread' in query:
+      return redirect('pizzahut_menu')
+
+
+    return render(request, 'foodapp/search.html')
+
