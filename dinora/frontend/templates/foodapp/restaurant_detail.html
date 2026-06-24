@@ -1,0 +1,40 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/restaurant_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="restaurant-header">
+    <h1>{{ restaurant.name }}</h1>
+    <p>⭐ {{ restaurant.rating }}</p>
+    <p>🚚 {{ restaurant.delivery_time }}</p>
+</div>
+
+<div class="menu-grid">
+
+    {% for food in foods %}
+
+    <div class="menu-card">
+        <img src="{{ food.image.url }}" class="menu-img">
+
+        <h3>{{ food.name }}</h3>
+
+        <p>{{ food.description }}</p>
+
+        <h4>₹{{ food.price }}</h4>
+
+        <a href="{% url 'add_to_cart' food.id %}" class="add-cart-btn">
+            Add To Cart
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

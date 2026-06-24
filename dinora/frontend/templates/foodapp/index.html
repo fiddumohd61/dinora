@@ -9,10 +9,85 @@
     <div class="hero-content">
         <h1>Delicious Food Delivered To Your Door</h1>
         <p>Discover the best local restaurants near you.</p>
-        <a href="/menu/" class="hero-btn">Order Now</a>
+        <!-- Search Section -->
+        <div class="hero-search">
+
+            <form action="{% url 'menu' %}" method="GET">
+
+                <input type="text" name="q" placeholder="🔍 Search Paradise Biryani, Pizza Hut, KFC...">
+
+                <button type="submit" class="search-btn">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="hero-buttons">
+            <a href="/menu/" class="hero-btn">Order Now</a>
+
+            <a href="/restaurants/" class="explore-btn">
+                Explore Restaurants
+            </a>
+        </div>
+
     </div>
 </section>
+<section class="categories">
+    <h2 class="section-title">Explore Categories</h2>
 
+    <div class="category-grid">
+
+        <div class="category-card">
+            <img src="{% static 'foodapp/images/chicken_biryani.png' %}">
+            <h3>Biryani</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="{% static 'foodapp/images/pizza.jpg' %}">
+            <h3>Pizza</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="{% static 'foodapp/images/burger.jpg' %}">
+            <h3>Burgers</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="{% static 'foodapp/images/chicken65.jpg' %}">
+            <h3>Chicken</h3>
+        </div>
+
+
+
+    </div>
+</section>
+<!-- STATS -->
+<section class="stats-section">
+
+    <div class="stat-card">
+        <h2>500+</h2>
+        <p>Orders Delivered</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>50+</h2>
+        <p>Happy Customers</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>3</h2>
+        <p>Partner Restaurants</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>30 Min</h2>
+        <p>Average Delivery</p>
+    </div>
+
+</section>
+<!-- OFFERS -->
 <!-- OFFERS -->
 <section class="offer-section">
     <h2>Today's Special Offers</h2>
@@ -20,127 +95,68 @@
     <div class="offer-grid">
 
         <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer1.jpg' %}">
+            <img src="{% static 'foodapp/images/offer1.png' %}">
             <h3>50% OFF</h3>
             <p>On First Order</p>
+            <div class="coupon-code">
+                🎟️ DINORA
+            </div>
+            <button class="offer-btn">Grab Offer</button>
         </div>
 
         <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer2.jpg' %}">
+            <img src="{% static 'foodapp/images/offer2.png' %}">
             <h3>Free Delivery</h3>
             <p>Above ₹299</p>
+            <div class="coupon-code">
+                🚚 FREEDEL
+            </div>
+            <button class="offer-btn">Grab Offer</button>
         </div>
 
         <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer3.jpg' %}">
+            <img src="{% static 'foodapp/images/offer3.png'  %}">
             <h3>Buy 1 Get 1</h3>
             <p>Selected Restaurants</p>
+            <div class="coupon-code">
+                🍔 BOGO
+            </div>
+            <button class="offer-btn">Grab Offer</button>
         </div>
 
     </div>
 </section>
-
-<!-- RESTAURANTS -->
+<!-- Popular Restaurants -->
 <section class="restaurants">
-   <h2 class="section-title">Popular Local Restaurants</h2>
+    <h2 class="section-title">Popular Restaurants</h2>
 
     <div class="restaurant-grid">
 
-        <div class="restaurant-card">
-            <img src="{% static 'foodapp/images/restaurant1.jpg' %}">
-            <h3>Hotel Paradise</h3>
-            <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
+        <div class="restaurant-grid">
+
+            {% for restaurant in restaurants %}
+
+            <div class="restaurant-card">
+                <img src="{{ restaurant.image.url }}">
+                <h3>{{ restaurant.name }}</h3>
+
+                <p class="rating">
+                    ⭐ {{ restaurant.rating }}
+                </p>
+
+                <p>
+                    {{ restaurant.delivery_time }}
+                </p>
+
+                <a href="{% url 'restaurant_detail' restaurant.id %}" class="view-menu-btn">
+                    View Menu
+                </a>
+
+            </div>
+
+            {% endfor %}
+
         </div>
-
-        <div class="restaurant-card">
-            <img src="{% static 'foodapp/images/restaurant2.jpg' %}">
-            <h3>Food Court</h3>
-            <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-        </div>
-
-        <div class="restaurant-card">
-            <img src="{% static 'foodapp/images/restaurant3.jpg' %}">
-            <h3>Spice Hub</h3>
-            <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-        </div>
-
-        <div class="restaurant-card">
-            <img src="{% static 'foodapp/images/restaurant4.jpg' %}">
-            <h3>Taste Point</h3>
-            <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-        </div>
-
-        <div class="restaurant-card">
-            <img src="{% static 'foodapp/images/restaurant5.jpg' %}">
-            <h3>Village Kitchen</h3>
-            <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-        </div>
-
-        <div class="restaurant-card">
-            <img src="{% static 'foodapp/images/restaurant6.jpg' %}">
-            <h3>Family Restaurant</h3>
-            <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-        </div>
-
-        <div class="restaurant-card">
-    <img src="{% static 'foodapp/images/restaurant7.jpg' %}">
-    <h3>Royal Biryani House</h3>
-    <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-</div>
-
-<div class="restaurant-card">
-    <img src="{% static 'foodapp/images/restaurant8.jpg' %}">
-    <h3>Green Leaf Restaurant</h3>
-    <p><p class="rating">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
- </p>
-</div>
-
-    </div>
 </section>
 
 <!-- POPULAR FOODS -->
@@ -149,97 +165,20 @@
 
     <div class="food-grid">
 
+        {% for food in foods %}
+
         <div class="food-card">
-            <img src="{% static 'foodapp/images/biryani.jpg' %}">
-            <h3>Biryani</h3>
-            <p>₹199</p>
+            <img src="{{ food.image.url }}">
+            <h3>{{ food.name }}</h3>
+            <p>₹{{ food.price }}</p>
         </div>
 
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/pizza.jpg' %}">
-            <h3>Pizza</h3>
-            <p>₹249</p>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/shawarma.jpg' %}">
-            <h3>Shawarma</h3>
-            <p>₹149</p>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/dosa.jpg' %}">
-            <h3>Dosa</h3>
-            <p>₹80</p>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/idly.jpg' %}">
-            <h3>Idly</h3>
-            <p>₹50</p>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/vada.jpg' %}">
-            <h3>Vada</h3>
-            <p>₹40</p>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/panipuri.jpg' %}">
-            <h3>Panipuri</h3>
-            <p>₹60</p>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/wadapav.jpg' %}">
-            <h3>Wada Pav</h3>
-            <p>₹40</p>
-        </div>
-
-        <div class="food-card">
-    <img src="{% static 'foodapp/images/chicken65.jpg' %}">
-    <h3>Chicken 65</h3>
-    <p>₹180</p>
-</div>
-
-<div class="food-card">
-    <img src="{% static 'foodapp/images/momos.jpg' %}">
-    <h3>Momos</h3>
-    <p>₹120</p>
-</div>
+        {% endfor %}
 
     </div>
 </section>
 
-<!-- SWEETS -->
-<section class="foods">
-    <h2 class="section-title">Sweets</h2>
 
-    <div class="food-grid">
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/gulabjaamun.jpg' %}">
-            <h3>Gulab Jamun</h3>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/rasgulla.jpg' %}">
-            <h3>Rasgulla</h3>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/jelebi.jpg' %}">
-            <h3>Jalebi</h3>
-        </div>
-
-        <div class="food-card">
-            <img src="{% static 'foodapp/images/icecream.jpg' %}">
-            <h3>Ice Cream</h3>
-        </div>
-
-    </div>
-</section>
 
 <!-- WHY CHOOSE US -->
 <section class="why-us">
@@ -273,5 +212,30 @@
 
     </div>
 </section>
+<!-- REVIEWS -->
+<section class="reviews">
+    <h2 class="section-title">What Our Customers Say</h2>
 
+    <div class="review-grid">
+
+        <div class="review-card">
+            <h3>⭐⭐⭐⭐⭐</h3>
+            <p>"Amazing Biryani and fast delivery. Loved it!"</p>
+            <h4>- Harish</h4>
+        </div>
+
+        <div class="review-card">
+            <h3>⭐⭐⭐⭐⭐</h3>
+            <p>"Pizza was fresh and delivery was quick."</p>
+            <h4>- Rahul</h4>
+        </div>
+
+        <div class="review-card">
+            <h3>⭐⭐⭐⭐⭐</h3>
+            <p>"Best chicken bucket in town. Great service."</p>
+            <h4>- Akhil</h4>
+        </div>
+
+    </div>
+</section>
 {% endblock %}

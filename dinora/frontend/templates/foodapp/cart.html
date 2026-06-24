@@ -1,21 +1,80 @@
-<h1>Your Cart</h1>
+{% extends 'foodapp/base.html' %}
+{% load static %}
 
-<table>
-<tr>
-<th>Food</th>
-<th>Price</th>
-</tr>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/cart.css' %}">
+{% endblock %}
 
-<tr>
-<td>Biryani</td>
-<td>₹199</td>
-</tr>
+{% block content %}
 
-<tr>
-<td>Pizza</td>
-<td>₹249</td>
-</tr>
+<div class="cart-container">
 
-</table>
+    <h1>Your Cart</h1>
 
-<h3>Total: ₹448</h3>
+    <div class="cart-wrapper">
+
+        <!-- Left Side -->
+        <div class="cart-items">
+
+            {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <img src="{{ item.food.image.url }}" alt="">
+
+                <div class="item-details">
+                    <h3>{{ item.food.name }}</h3>
+                    <p>{{ item.food.description }}</p>
+                    <span>₹{{ item.food.price }}</span>
+                </div>
+
+                <div class="quantity">
+                    <a href="{% url 'decrease_quantity' item.id %}">➖</a>
+
+                    {{ item.quantity }}
+
+                    <a href="{% url 'increase_quantity' item.id %}">➕</a>
+                </div>
+
+                <a href="{% url 'remove_item' item.id %}">
+                    Remove
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="cart-summary">
+
+            <h2>Order Summary</h2>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>₹{{ total }}</span>
+            </div>
+
+            
+
+            <hr>
+
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>₹{{ total }}</span>
+            </div>
+            <h2>Total Amount: ₹{{ grand_total }}</h2>
+            <button class="checkout-btn">
+                <a href="{% url 'place_order' %}" class="checkout-btn">
+                    Proceed To Checkout
+                </a>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
