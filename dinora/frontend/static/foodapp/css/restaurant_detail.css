@@ -82,3 +82,25 @@ body{
 .add-cart-btn:hover{
     background:#e65c00;
 }
+/* ==========================================
+   Restaurant Details - Out Of Stock Button
+========================================== */
+
+.out-stock-btn{
+    display:block;
+    width:80%;
+    margin:15px auto 25px;
+    padding:14px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    text-align:center;
+    cursor:not-allowed;
+}
+
+.out-stock-btn:hover{
+    background:#dc3545;
+}

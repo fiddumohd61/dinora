@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import Restaurant,FoodItem,Cart,CartItem,Order, OrderItem
 from django.contrib.auth.decorators import login_required
 
@@ -81,7 +81,17 @@ def cart(request):
 
 @login_required(login_url='login')
 def add_to_cart(request, food_id):
-    food = FoodItem.objects.get(id=food_id)
+
+    food = get_object_or_404(FoodItem, id=food_id)
+
+    # ==========================================
+    # Check Food Availability
+    # ==========================================
+
+    if not food.is_available:
+        messages.error(request, "This item is currently out of stock.")
+
+        return redirect('restaurant_detail', id=food.restaurant.id)
 
     cart, created = Cart.objects.get_or_create(user=request.user)
 

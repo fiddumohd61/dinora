@@ -1,0 +1,347 @@
+body{
+    margin:0;
+    background:#FFF8F0;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ==========================================
+   Dashboard Layout
+========================================== */
+
+.dashboard{
+    display:flex;
+    min-height:100vh;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:260px;
+    background:#ff6600;
+    padding:30px 20px;
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar h2{
+    color:white;
+    text-align:start;
+    margin-bottom:50px;
+    font-weight:700;
+}
+
+.sidebar a{
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+    margin-bottom:12px;
+    border-radius:10px;
+    font-size:17px;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:white;
+    color:#ff6600;
+}
+
+/* Main Content */
+
+.main-content{
+    flex:1;
+    padding:40px;
+}
+
+.main-content h1{
+    color:#ff6600;
+    margin-bottom:40px;
+    font-size:38px;
+}
+
+/* ==========================================
+   Dashboard Cards
+========================================== */
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.dashboard-card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+}
+
+.dashboard-card h3{
+    color:#555;
+    margin-bottom:15px;
+}
+
+.dashboard-card h2{
+    color:#ff6600;
+    font-size:36px;
+    font-weight:bold;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.dashboard{
+    flex-direction:column;
+}
+
+.sidebar{
+    width:100%;
+}
+
+.main-content{
+    padding:20px;
+}
+
+}
+
+
+/* ==========================================
+   Add Food Form
+========================================== */
+
+.form-container{
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    max-width:700px;
+}
+
+.form-container p{
+    margin-bottom:20px;
+}
+
+.form-container label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#444;
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.form-container textarea{
+    resize:vertical;
+}
+
+.save-btn{
+    background:#ff6600;
+    color:white;
+    border:none;
+    padding:14px 30px;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    background:#e65c00;
+}
+
+/* ==========================================
+   View Foods Table
+========================================== */
+
+.food-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.food-table th{
+    background:#ff6600;
+    color:white;
+    padding:18px;
+    text-align:left;
+}
+
+.food-table td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+    vertical-align:middle;
+}
+
+.food-table tr:hover{
+    background:#fff5eb;
+}
+
+.food-image{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* ==========================================
+   Edit & Delete Buttons
+========================================== */
+.edit-btn,
+.delete-btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:8px 16px;
+    border-radius:8px;
+    color:white;
+    font-size:14px;
+    margin-right:10px;
+    margin-bottom:5px;
+    min-width:70px;
+    text-align:center;
+}
+
+.edit-btn{
+    background:#28a745;
+}
+
+.edit-btn:hover{
+    background:#218838;
+    color:white;
+}
+
+.delete-btn{
+    background:#dc3545;
+}
+
+.delete-btn:hover{
+    background:#c82333;
+    color:white;
+}
+
+
+.action-buttons{
+    white-space:nowrap;
+}
+
+/* ==========================================
+   Status Text
+========================================== */
+.available{
+    color:#28a745;
+    font-weight:600;
+}
+
+.unavailable{
+    color:#dc3545;
+    font-weight:600;
+}
+
+/* ==========================================
+   Food Availability (In Stock / Out of Stock)
+========================================== */
+.stock-btn{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:8px;
+    text-decoration:none;
+    color:white;
+    font-size:13px;
+    font-weight:600;
+}
+
+.out-stock{
+    background:#dc3545;
+}
+
+.out-stock:hover{
+    background:#c82333;
+    color:white;
+}
+
+.in-stock{
+    background:#28a745;
+}
+
+.in-stock:hover{
+    background:#218838;
+    color:white;
+}
+/* ==========================================
+   Customer Orders
+========================================== */
+
+
+.status-badge{
+    display:inline-block;
+    background:#ff9800;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ==========================================
+   Order Status Dropdown
+========================================== */
+
+.status-select{
+    width:180px;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:15px;
+}
+
+.status-select:focus{
+    outline:none;
+    border-color:#ff6600;
+}
+/* ==========================================
+   Dashboard Statistics
+========================================== */
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.dashboard-card{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.dashboard-card h2{
+    color:#ff6600;
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.dashboard-card p{
+    color:#555;
+    font-size:16px;
+    font-weight:600;
+}
