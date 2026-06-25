@@ -20,82 +20,81 @@
 <div class="restaurant-grid">
 
 
-<!-- Hotel Paradise -->
-<div class="restaurant-card">
+    <!-- Hotel Paradise -->
+    <div class="restaurant-card">
 
-    <div class="restaurant-image">
-        <img src="{% static 'foodapp/images/hotel_paradise.jpg' %}" alt="">
+        <div class="restaurant-image">
+            <img src="{% static 'foodapp/images/hotel_paradise.jpg' %}" alt="">
+        </div>
+
+        <div class="restaurant-logo">
+            <img src="{% static 'foodapp/images/paradise_logo.png' %}" alt="">
+        </div>
+
+        <h3>Hotel Paradise</h3>
+
+        <p class="info">⭐ 4.5/5 &nbsp; | &nbsp; ⏱ 25 mins</p>
+
+        <p class="location">📍 Secunderabad</p>
+
+        <p class="status">Closed</p>
+
+        <a href="{% url 'restaurant_detail' 1 %}">
+            <button class="menu-btn">View Menu</button>
+        </a>
+
     </div>
 
-    <div class="restaurant-logo">
-        <img src="{% static 'foodapp/images/paradise_logo.png' %}" alt="">
+
+    <!-- Pizza Hut -->
+    <div class="restaurant-card">
+
+        <div class="restaurant-image">
+            <img src="{% static 'foodapp/images/pizzahut.jpg' %}" alt="">
+        </div>
+
+        <div class="restaurant-logo">
+            <img src="{% static 'foodapp/images/pizza_logo.png' %}" alt="">
+        </div>
+
+        <h3>Pizza Hut</h3>
+
+        <p class="info">⭐ 4.3/5 &nbsp; | &nbsp; ⏱ 40 mins</p>
+
+        <p class="location">📍 Uppal</p>
+
+        <p class="status">Closed</p>
+
+        <a href="{% url 'restaurant_detail' 2 %}">
+            <button class="menu-btn">View Menu</button>
+        </a>
     </div>
 
-    <h3>Hotel Paradise</h3>
 
-    <p class="info">⭐ 4.5/5 &nbsp; | &nbsp; ⏱ 25 mins</p>
+    <!-- KFC -->
+    <div class="restaurant-card">
 
-    <p class="location">📍 Secunderabad</p>
+        <div class="restaurant-image">
+            <img src="{% static 'foodapp/images/kfc.jpg' %}" alt="">
+        </div>
 
-    <p class="status">Closed</p>
+        <div class="restaurant-logo">
+            <img src="{% static 'foodapp/images/kfc_logo.png' %}" alt="">
+        </div>
 
-    <a href="{% url 'hotel_paradise_menu' %}">
-        <button class="menu-btn">View Menu </button>
-    </a>
+        <h3>KFC</h3>
 
-</div>
+        <p class="info">⭐ 4.2/5 &nbsp; | &nbsp; ⏱ 30 mins</p>
 
+        <p class="location">📍 Dilsukhnagar</p>
 
-<!-- Pizza Hut -->
-<div class="restaurant-card">
+        <p class="status">Closed</p>
 
-    <div class="restaurant-image">
-        <img src="{% static 'foodapp/images/pizzahut.jpg' %}" alt="">
+        <a href="{% url 'restaurant_detail' 3 %}">
+            <button class="menu-btn">View Menu</button>
+        </a>
+
     </div>
-
-    <div class="restaurant-logo">
-        <img src="{% static 'foodapp/images/pizza_logo.png' %}" alt="">
-    </div>
-
-    <h3>Pizza Hut</h3>
-
-    <p class="info">⭐ 4.3/5 &nbsp; | &nbsp; ⏱ 40 mins</p>
-
-    <p class="location">📍 Uppal</p>
-
-    <p class="status">Closed</p>
-
-    <a href="{% url 'pizzahut_menu' %}">
-        <button class="menu-btn">View Menu </button>
-    </a>
-
-</div>
-
-
-<!-- KFC -->
-<div class="restaurant-card">
-
-    <div class="restaurant-image">
-        <img src="{% static 'foodapp/images/kfc.jpg' %}" alt="">
-    </div>
-
-    <div class="restaurant-logo">
-        <img src="{% static 'foodapp/images/kfc_logo.png' %}" alt="">
-    </div>
-
-    <h3>KFC</h3>
-
-    <p class="info">⭐ 4.2/5 &nbsp; | &nbsp; ⏱ 30 mins</p>
-
-    <p class="location">📍 Dilsukhnagar</p>
-
-    <p class="status">Closed</p>
-
-    <a href="{% url 'kfc_menu' %}">
-        <button class="menu-btn">View Menu </button>
-    </a>
-
-</div>
 
 
 </div>

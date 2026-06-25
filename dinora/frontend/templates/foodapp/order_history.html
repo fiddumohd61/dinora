@@ -1,0 +1,55 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/order_history.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="orders-container">
+
+    <h1>My Orders</h1>
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+        <div class="order-header">
+            <h3>Order #DIN{{ order.id }}</h3>
+            <span class="status delivered">Delivered</span>
+        </div>
+
+        <div class="order-details">
+
+            {% for item in order.orderitem_set.all %}
+                <p>{{ item.food.name }} × {{ item.quantity }}</p>
+            {% endfor %}
+
+        </div>
+
+        <div class="order-footer">
+
+            <div>
+                <strong>Total:</strong>
+                ₹{{ order.total_amount }}
+            </div>
+
+            <div>
+                <strong>Date:</strong>
+                {{ order.created_at|date:"d M Y" }}
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <h2>No Orders Yet</h2>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

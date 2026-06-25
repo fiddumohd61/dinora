@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
@@ -18,6 +18,10 @@ def login_view(request):
             messages.error(request, "Invalid username or password")
 
     return render(request, 'accounts/login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def register_view(request):
     if request.method == 'POST':
