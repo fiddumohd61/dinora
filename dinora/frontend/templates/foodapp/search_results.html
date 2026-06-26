@@ -1,0 +1,140 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/search_results.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="search-container">
+
+    <h1 class="search-title">
+        Search Results
+    </h1>
+
+    <p class="search-subtitle">
+        Results for "<strong>{{ query }}</strong>"
+    </p>
+
+    <!-- ==========================================
+         Restaurants
+    ========================================== -->
+
+    <div class="search-section">
+
+        <h2>Restaurants</h2>
+
+        {% if restaurants %}
+
+        <div class="search-grid">
+
+            {% for restaurant in restaurants %}
+
+            <div class="restaurant-card">
+
+                <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
+
+                <div class="restaurant-card-content">
+
+                    <h3>{{ restaurant.name }}</h3>
+
+                    <p>⭐ {{ restaurant.rating }}</p>
+
+                    <p>🚚 {{ restaurant.delivery_time }}</p>
+
+                    {% if restaurant.is_open %}
+
+                    <p style="color:green;">
+                        🟢 Open
+                    </p>
+
+                    {% else %}
+
+                    <p style="color:red;">
+                        🔴 Closed
+                    </p>
+
+                    {% endif %}
+
+                    <a href="{% url 'restaurant_detail' restaurant.id %}" class="view-btn">
+                        View Restaurant
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-results">
+
+            <h3>No restaurants found.</h3>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ==========================================
+         Food Items
+    ========================================== -->
+
+    <div class="search-section">
+
+        <h2>Food Items</h2>
+
+        {% if foods %}
+
+        <div class="search-grid">
+
+            {% for food in foods %}
+
+            <div class="food-card">
+
+                <img src="{{ food.image.url }}" alt="{{ food.name }}">
+
+                <div class="food-card-content">
+
+                    <h3>{{ food.name }}</h3>
+
+                    <p>{{ food.restaurant.name }}</p>
+
+                    <p>{{ food.description|truncatewords:12 }}</p>
+
+                    <p class="price">
+                        ₹{{ food.price }}
+                    </p>
+
+                    <a href="{% url 'restaurant_detail' food.restaurant.id %}" class="view-btn">
+                        View Restaurant
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-results">
+
+            <h3>No food items found.</h3>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

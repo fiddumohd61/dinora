@@ -1,0 +1,133 @@
+/* ==========================================
+   Search Results Page
+========================================== */
+
+body{
+    background:#fff8f0;
+}
+
+.search-container{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+.search-title{
+    text-align:center;
+    font-size:42px;
+    color:#ff6600;
+    margin-bottom:10px;
+}
+
+.search-subtitle{
+    text-align:center;
+    color:#666;
+    font-size:18px;
+    margin-bottom:50px;
+}
+
+/* ==========================================
+   Section Titles
+========================================== */
+
+.search-section{
+    margin-bottom:60px;
+}
+
+.search-section h2{
+    color:#333;
+    margin-bottom:25px;
+    border-left:6px solid #ff6600;
+    padding-left:15px;
+}
+
+/* ==========================================
+   Restaurant Cards
+========================================== */
+
+.search-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.restaurant-card,
+.food-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.restaurant-card:hover,
+.food-card:hover{
+    transform:translateY(-8px);
+}
+
+.restaurant-card img,
+.food-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.restaurant-card-content,
+.food-card-content{
+    padding:20px;
+}
+
+.restaurant-card h3,
+.food-card h3{
+    color:#222;
+    margin-bottom:10px;
+}
+
+.restaurant-card p,
+.food-card p{
+    color:#666;
+    margin-bottom:8px;
+}
+
+.price{
+    color:#ff6600;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.view-btn{
+    display:inline-block;
+    margin-top:15px;
+    background:#ff6600;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#e65c00;
+}
+
+/* ==========================================
+   No Results
+========================================== */
+
+.no-results{
+    background:#fff;
+    padding:40px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.no-results h3{
+    color:#888;
+    font-size:24px;
+}
+
+.no-results p{
+    margin-top:10px;
+    color:#666;
+}

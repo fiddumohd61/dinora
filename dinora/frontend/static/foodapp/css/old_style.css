@@ -1,3 +1,112 @@
+
+/* HERO */
+
+.hero{
+height:650px;
+background-image:url("/static/foodapp/images/hero.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+
+}
+
+.hero-content{
+background:rgba(0,0,0,0.60);
+color:white;
+padding:60px;
+border-radius:20px;
+text-align:center;
+max-width:850px;
+}
+
+.hero-content h1{
+font-size:60px;
+line-height:1.2;
+margin-bottom:20px;
+}
+
+.hero-content p{
+font-size:22px;
+margin-bottom:30px;
+}
+
+/* SEARCH */
+
+.hero-search{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:30px;
+}
+
+.hero-search input{
+width:500px;
+padding:18px 25px;
+border:none;
+outline:none;
+font-size:16px;
+border-radius:50px 0 0 50px;
+background:white;
+}
+
+.search-btn{
+background:#ff6600;
+color:white;
+text-decoration:none;
+font-weight:bold;
+padding:18px 30px;
+border-radius:0 50px 50px 0;
+transition:.3s;
+}
+
+.search-btn:hover
+
+/* BUTTONS */
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.hero-btn{
+display:inline-block;
+background:#ff6600;
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+padding:14px 30px;
+border-radius:10px;
+}
+
+.hero-btn:hover
+
+.explore-btn{
+    display:inline-block ;
+    background:white ;
+    color:#ff6600 ;
+    text-decoration:none ;
+    padding:14px 30px ;
+    border-radius:10px ;
+    font-size:18px ;
+    font-weight:bold ;
+    border:2px solid;
+    transition:0.3s;
+}
+
+.explore-btn:hover{
+    background:#ff6600 ;
+    color:white ;
+}
+
+
 *{
     margin:0;
     padding:0;
@@ -28,7 +137,6 @@ body{
     display:flex;
     list-style:none;
     gap:30px;
-    margin-right:30px;
 }
 
 .nav-links a{
@@ -65,7 +173,7 @@ body{
     display:flex;
     align-items:center;
     gap:15px;
-  
+    margin-right: 20px;
 }
 
 .login-btn{
@@ -105,7 +213,7 @@ body{
     width:55px;
     height:55px;
     border-radius:50%;
-    
+    margin-left: 20px;
 }
 
 .logo-text h2{
@@ -125,8 +233,263 @@ body{
 
 
 
+/* SECTION */
 
+.section-title{
+    text-align:center;
+    margin:20px 0 10px;
+    font-size:38px;
+    color:#222;
+}
 
+/* RESTAURANTS */
+
+.restaurant-grid{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:40px;
+}
+
+.restaurant-card{
+    width:320px;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    transition:.3s;
+    text-align:center;
+}
+
+.restaurant-card:hover{
+    transform:translateY(-8px);
+}
+
+.restaurant-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.restaurant-card h3{
+    margin-top:15px;
+    font-size:28px;
+}
+
+.rating{
+    color:orange;
+    font-size:18px;
+}
+
+.delivery-time{
+    color:gray;
+    margin:10px 0;
+}
+
+.view-menu-btn{
+    display:inline-block;
+    margin:15px 0 25px;
+    padding:12px 30px;
+    background:#ff6600;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.view-menu-btn:hover{
+    background:#e65c00;
+}
+/* FOOD ITEMS */
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:10px 50px;
+}
+
+.food-card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.food-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.food-card h3{
+    margin:10px 0;
+}
+
+.food-card p{
+    color:#ff6600;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+/* CATEGORIES */
+.categories{
+    padding:60px 8%;
+    text-align:center;
+}
+
+.category-grid{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+    margin-top:40px;
+}
+
+.category-card{
+    width:250px;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.category-card:hover{
+    transform:translateY(-8px);
+}
+
+.category-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.category-card h3{
+    padding:15px;
+    font-size:22px;
+    color:#333;
+}
+/* STATS */
+.stats-section{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:70px 8%;
+    background:#fff8f5;
+    flex-wrap:wrap;
+}
+
+.stat-card{
+    width:250px;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-8px);
+}
+
+.stat-card h2{
+    color:#ff6600;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.stat-card p{
+    color:#555;
+    font-size:18px;
+}
+/* OFFERS */
+.offer-section{
+    padding:70px 8%;
+    background:#fff8f5;
+    text-align:center;
+}
+
+.offer-section h2{
+    font-size:40px;
+    color:#222;
+    margin-bottom:40px;
+}
+
+.offer-grid{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.offer-card{
+    width:350px;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.offer-card:hover{
+    transform:translateY(-10px);
+}
+
+.offer-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.offer-card h3{
+    color:#ff6600;
+    margin-top:20px;
+    font-size:28px;
+}
+
+.offer-card p{
+    color:#555;
+    margin:10px 0;
+}
+
+.offer-card h4{
+    color:#333;
+    margin-bottom:20px;
+}
+
+.offer-btn{
+    background:#ff6600;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:20px;
+    transition:0.3s;
+}
+
+.offer-btn:hover{
+    background:#e65c00;
+}
+.coupon-code{
+    width:160px;
+    margin:15px auto;
+    padding:12px;
+    border:2px dashed #ff6600;
+    background:#fff7f0;
+    color:#ff6600;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
 /* FOOTER */
 
 .footer{

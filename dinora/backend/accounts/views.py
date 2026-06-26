@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from .forms import UserProfileForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def login_view(request):
@@ -13,6 +15,8 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
+            if hasattr(user, 'restaurant'):
+                return redirect('restaurant_dashboard')
             return redirect('home')
         else:
             messages.error(request, "Invalid username or password")
@@ -37,7 +41,9 @@ def register_view(request):
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists")
             return redirect('register')
-
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists")
+            return redirect('register')
         User.objects.create_user(
             username=username,
             email=email,
@@ -51,3 +57,39 @@ def register_view(request):
 
 def forgot_password(request):
     return render(request, 'accounts/forgot_password.html')
+@login_required(login_url='login')
+def profile(request):
+
+    if request.method == "POST":
+
+        form = UserProfileForm(
+            request.POST,
+            instance=request.user
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Profile updated successfully."
+            )
+
+            return redirect("profile")
+
+    else:
+
+        form = UserProfileForm(
+            instance=request.user
+        )
+
+    context = {
+        "form": form
+    }
+
+    return render(
+        request,
+        "accounts/profile.html",
+        context
+    )

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="{% static 'restaurant/css/dashboard.css' %}">
     {% block extra_css %}
-    
+
     {% endblock %}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -71,11 +71,10 @@
                 <i class="fas fa-store"></i>
                 Open / Closed
             </a>
-            <li>
-                <a href="{% url 'restaurant_profile' %}">
-                    Restaurant Profile
-                </a>
-            </li>
+            <a href="{% url 'restaurant_profile' %}">
+                <i class="fas fa-user"></i>
+                Restaurant Profile
+            </a>
 
             <!-- Logout -->
 
@@ -91,6 +90,20 @@
         <!-- Main Content -->
 
         <div class="main-content">
+
+            {% if messages %}
+            <div class="messages">
+
+                {% for message in messages %}
+
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+
+                {% endfor %}
+
+            </div>
+            {% endif %}
 
             {% block content %}
             {% endblock %}

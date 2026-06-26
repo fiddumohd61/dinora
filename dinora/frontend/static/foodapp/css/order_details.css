@@ -1,0 +1,122 @@
+/* ==========================================
+   Page Background
+========================================== */
+
+body{
+    background:#fff8f0;
+}
+
+/* ==========================================
+   Container
+========================================== */
+
+.order-details-container{
+    width:90%;
+    max-width:900px;
+    margin:50px auto;
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.order-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.order-header h1{
+    color:#ff6600;
+    margin-bottom:15px;
+}
+
+.order-header p{
+    color:#555;
+    margin:8px 0;
+    font-size:17px;
+}
+
+.status{
+    color:#28a745;
+    font-weight:bold;
+}
+
+/* ==========================================
+   Table
+========================================== */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#ff6600;
+    color:#fff;
+}
+
+th,
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+tbody tr:hover{
+    background:#fff5ef;
+}
+
+/* ==========================================
+   Total
+========================================== */
+
+.total-section{
+    text-align:right;
+    margin-top:30px;
+}
+
+.total-section h2{
+    color:#ff6600;
+}
+
+/* ==========================================
+   Buttons
+========================================== */
+
+.button-group{
+    display:flex;
+    justify-content:space-between;
+    margin-top:35px;
+}
+
+.back-btn,
+.review-btn{
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:8px;
+    color:#fff;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn{
+    background:#6c757d;
+}
+
+.back-btn:hover{
+    background:#5a6268;
+    color:#fff;
+}
+
+.review-btn{
+    background:#ff6600;
+}
+
+.review-btn:hover{
+    background:#e65c00;
+    color:#fff;
+}

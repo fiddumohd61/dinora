@@ -1,0 +1,84 @@
+/* ==========================================
+   Page Background
+========================================== */
+
+body{
+    background:#fff8f0;
+}
+
+
+/* ==========================================
+   Profile Container
+========================================== */
+
+.profile-container{
+    width:90%;
+    max-width:600px;
+    margin:60px auto;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+
+/* ==========================================
+   Heading
+========================================== */
+
+.profile-container h1{
+    text-align:center;
+    color:#ff6600;
+    margin-bottom:30px;
+}
+
+
+/* ==========================================
+   Form
+========================================== */
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#333;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.form-group input:focus{
+    outline:none;
+    border-color:#ff6600;
+}
+
+
+/* ==========================================
+   Save Button
+========================================== */
+
+.save-btn{
+    width:100%;
+    padding:14px;
+    background:#ff6600;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    background:#e65c00;
+}

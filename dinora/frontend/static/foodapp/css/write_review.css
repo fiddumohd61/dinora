@@ -1,0 +1,98 @@
+/* ==========================================
+   Page Background
+========================================== */
+
+body{
+    background:#fff8f0;
+}
+
+
+/* ==========================================
+   Review Container
+========================================== */
+
+.review-container{
+    width:90%;
+    max-width:650px;
+    margin:60px auto;
+    background:#ffffff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+
+/* ==========================================
+   Heading
+========================================== */
+
+.review-container h1{
+    text-align:center;
+    color:#ff6600;
+    margin-bottom:10px;
+}
+
+.review-container p{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+
+/* ==========================================
+   Form Group
+========================================== */
+
+.form-group{
+    margin-bottom:25px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:10px;
+    color:#333;
+}
+
+
+/* ==========================================
+   Form Inputs
+========================================== */
+
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    transition:0.3s;
+}
+
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#ff6600;
+}
+
+
+/* ==========================================
+   Submit Button
+========================================== */
+
+.submit-btn{
+    width:100%;
+    padding:15px;
+    background:#ff6600;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.submit-btn:hover{
+    background:#e65c00;
+}
