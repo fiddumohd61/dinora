@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurant Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'restaurant/css/dashboard.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+
+        <div class="sidebar">
+
+            <h2>🍽️ Dinora</h2>
+
+            <a href="{% url 'restaurant_dashboard' %}">
+                <i class="fas fa-chart-line"></i>
+                Dashboard
+            </a>
+
+            <a href="{% url 'add_food' %}">
+                <i class="fas fa-plus-circle"></i>
+                Add Food
+            </a>
+
+            <a href="{% url 'view_foods' %}">
+                <i class="fas fa-utensils"></i>
+                View Foods
+            </a>
+
+            <a href="{% url 'customer_orders' %}">
+                <i class="fas fa-box"></i>
+                Customer Orders
+            </a>
+
+            <a href="{% url 'logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="main-content">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

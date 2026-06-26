@@ -1,0 +1,23 @@
+{% extends 'restaurant/base_dashboard.html' %}
+
+{% block content %}
+
+<h1>Add Food</h1>
+
+<div class="form-container">
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="save-btn">
+            Save Food
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

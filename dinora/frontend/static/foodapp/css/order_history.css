@@ -63,3 +63,40 @@
 .track-btn:hover{
     background:#e89a15;
 }
+
+/* ==========================================
+   Order Status
+========================================== */
+
+.status{
+    padding:8px 14px;
+    border-radius:20px;
+    color:white;
+    font-weight:600;
+    font-size:14px;
+}
+
+.pending{
+    background:#ffc107;
+    color:#333;
+}
+
+.accepted{
+    background:#17a2b8;
+}
+
+.preparing{
+    background:#fd7e14;
+}
+
+.out-for-delivery{
+    background:#007bff;
+}
+
+.delivered{
+    background:#28a745;
+}
+
+.cancelled{
+    background:#dc3545;
+}

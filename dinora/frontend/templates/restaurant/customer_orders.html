@@ -1,0 +1,88 @@
+{% extends 'restaurant/base_dashboard.html' %}
+
+{% block content %}
+
+<h1>Customer Orders</h1>
+
+<table class="food-table">
+
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>DIN{{ order.id }}</td>
+
+            <td>{{ order.user.username }}</td>
+
+            <td>₹{{ order.total_amount }}</td>
+
+            <td>
+                <span class="status-badge">
+                    {{ order.status }}
+                </span>
+            </td>
+            <td>
+
+                <form action="{% url 'update_order_status' order.id %}" method="POST">
+
+                    {% csrf_token %}
+
+                    <select name="status" class="status-select">
+
+                        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>
+                            Pending
+                        </option>
+
+                        <option value="Accepted" {% if order.status == 'Accepted' %}selected{% endif %}>
+                            Accepted
+                        </option>
+
+                        <option value="Preparing" {% if order.status == 'Preparing' %}selected{% endif %}>
+                            Preparing
+                        </option>
+
+                        <option value="Out for Delivery" {% if order.status == 'Out for Delivery' %}selected{% endif %}>
+                            Out for Delivery
+                        </option>
+
+                        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>
+                            Delivered
+                        </option>
+
+                        <option value="Cancelled" {% if order.status == 'Cancelled' %}selected{% endif %}>
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                    <br><br>
+
+                    <button type="submit" class="save-btn">
+                        Update
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
