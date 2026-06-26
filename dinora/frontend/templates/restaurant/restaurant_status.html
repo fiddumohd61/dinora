@@ -1,0 +1,35 @@
+{% extends 'restaurant/base_dashboard.html' %}
+
+{% block content %}
+
+<h1>Restaurant Status</h1>
+
+<div class="dashboard-card">
+
+    <h2>{{ restaurant.name }}</h2>
+
+    {% if restaurant.is_open %}
+
+        <h3 style="color:green;">🟢 OPEN</h3>
+
+    {% else %}
+
+        <h3 style="color:red;">🔴 CLOSED</h3>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{% url 'toggle_restaurant_status' %}" class="btn">
+
+        {% if restaurant.is_open %}
+            Close Restaurant
+        {% else %}
+            Open Restaurant
+        {% endif %}
+
+    </a>
+
+</div>
+
+{% endblock %}

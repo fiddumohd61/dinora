@@ -11,7 +11,9 @@
     <title>Restaurant Dashboard</title>
 
     <link rel="stylesheet" href="{% static 'restaurant/css/dashboard.css' %}">
-
+    {% block extra_css %}
+    
+    {% endblock %}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
@@ -27,12 +29,20 @@
 
         <div class="sidebar">
 
-            <h2>🍽️ Dinora</h2>
+            <h2>Dinora</h2>
+
+            <!-- Dashboard -->
+
+            <p class="sidebar-heading">Dashboard</p>
 
             <a href="{% url 'restaurant_dashboard' %}">
                 <i class="fas fa-chart-line"></i>
                 Dashboard
             </a>
+
+            <!-- Food Management -->
+
+            <p class="sidebar-heading">Food Management</p>
 
             <a href="{% url 'add_food' %}">
                 <i class="fas fa-plus-circle"></i>
@@ -44,10 +54,32 @@
                 View Foods
             </a>
 
+            <!-- Order Management -->
+
+            <p class="sidebar-heading">Order Management</p>
+
             <a href="{% url 'customer_orders' %}">
-                <i class="fas fa-box"></i>
+                <i class="fas fa-box-open"></i>
                 Customer Orders
             </a>
+
+            <!-- Restaurant -->
+
+            <p class="sidebar-heading">Restaurant</p>
+
+            <a href="{% url 'restaurant_status' %}">
+                <i class="fas fa-store"></i>
+                Open / Closed
+            </a>
+            <li>
+                <a href="{% url 'restaurant_profile' %}">
+                    Restaurant Profile
+                </a>
+            </li>
+
+            <!-- Logout -->
+
+            <p class="sidebar-heading">Account</p>
 
             <a href="{% url 'logout' %}">
                 <i class="fas fa-sign-out-alt"></i>

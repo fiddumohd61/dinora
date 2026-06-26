@@ -1,31 +1,43 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .forms import FoodForm,FoodItem
-from foodapp.models import Order,FoodItem
+from .forms import FoodForm,FoodItem,RestaurantProfileForm
+from foodapp.models import Order,FoodItem,Restaurant
 from django.db.models import Sum
+from django.http import HttpResponse
 def dashboard(request):
+    
+  
+    restaurant = Restaurant.objects.filter(owner=request.user).first()
 
-    total_foods = FoodItem.objects.count()
+    
 
-    total_orders = Order.objects.count()
+    if restaurant is None:
+        return HttpResponse("No restaurant linked to this user")
 
-    total_revenue = Order.objects.aggregate(
+    # Total foods for this restaurant
+    total_foods = FoodItem.objects.filter(
+        restaurant=restaurant
+    ).count()
+
+    # Orders that contain this restaurant's food
+    orders = Order.objects.filter(
+        orderitem__food__restaurant=restaurant
+    ).distinct()
+
+    total_orders = orders.count()
+
+    total_revenue = orders.aggregate(
         Sum('total_amount')
     )['total_amount__sum'] or 0
 
-    pending_orders = Order.objects.filter(
+    pending_orders = orders.filter(
         status='Pending'
     ).count()
 
     context = {
-
         'total_foods': total_foods,
-
         'total_orders': total_orders,
-
         'total_revenue': total_revenue,
-
         'pending_orders': pending_orders,
-
     }
 
     return render(
@@ -39,7 +51,15 @@ def add_food(request):
         form = FoodForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
+
+            food = form.save(commit=False)
+
+            restaurant = Restaurant.objects.get(owner=request.user)
+
+            food.restaurant = restaurant
+
+            food.save()
+
             return redirect('restaurant_dashboard')
 
     else:
@@ -53,8 +73,16 @@ def add_food(request):
 
 
 def view_foods(request):
+  
 
-    foods = FoodItem.objects.all()
+
+    restaurant = Restaurant.objects.get(owner=request.user)
+
+   
+
+    foods = FoodItem.objects.filter(restaurant=restaurant)
+
+  
 
     context = {
         'foods': foods
@@ -64,7 +92,11 @@ def view_foods(request):
 
 def edit_food(request, id):
 
-    food = get_object_or_404(FoodItem, id=id)
+    food = get_object_or_404(
+    FoodItem,
+    id=id,
+    restaurant__owner=request.user
+    )
 
     if request.method == "POST":
         form = FoodForm(request.POST, request.FILES, instance=food)
@@ -84,7 +116,11 @@ def edit_food(request, id):
 
 def delete_food(request, id):
 
-    food = get_object_or_404(FoodItem, id=id)
+    food = get_object_or_404(
+    FoodItem,
+    id=id,
+    restaurant__owner=request.user
+    )
 
     food.delete()
 
@@ -102,7 +138,11 @@ def toggle_stock(request, id):
 
 def customer_orders(request):
 
-    orders = Order.objects.all().order_by('-created_at')
+    restaurant = Restaurant.objects.get(owner=request.user)
+
+    orders = Order.objects.filter(
+        orderitem__food__restaurant=restaurant
+    ).distinct().order_by('-created_at')
 
     context = {
         'orders': orders
@@ -125,3 +165,56 @@ def update_order_status(request, id):
         order.save()
 
     return redirect('customer_orders')
+def toggle_restaurant_status(request):
+    
+    restaurant = Restaurant.objects.get(owner=request.user)
+
+    restaurant.is_open = not restaurant.is_open
+
+    restaurant.save()
+
+    return redirect('restaurant_status')
+
+def restaurant_status(request):
+
+    restaurant = Restaurant.objects.get(owner=request.user)
+
+    context = {
+        'restaurant': restaurant
+    }
+
+    return render(
+        request,
+        'restaurant/restaurant_status.html',
+        context
+    )
+    
+def restaurant_profile(request):
+
+    restaurant = Restaurant.objects.get(owner=request.user)
+
+    if request.method == "POST":
+
+        form = RestaurantProfileForm(
+            request.POST,
+            request.FILES,
+            instance=restaurant
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect('restaurant_profile')
+
+    else:
+
+        form = RestaurantProfileForm(instance=restaurant)
+
+    context = {
+        'form': form
+    }
+
+    return render(
+        request,
+        'restaurant/restaurant_profile.html',
+        context
+    )    
