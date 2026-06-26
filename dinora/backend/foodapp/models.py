@@ -2,10 +2,45 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Restaurant(models.Model):
+
+    owner = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='restaurants/')
     rating = models.FloatField()
     delivery_time = models.CharField(max_length=20)
+
+    is_open = models.BooleanField(default=True)
+
+    address = models.TextField(blank=True)
+
+    phone = models.CharField(
+        max_length=15,
+        blank=True
+    )
+
+    email = models.EmailField(
+        blank=True
+    )
+
+    description = models.TextField(
+        blank=True
+    )
+
+    opening_time = models.TimeField(
+        null=True,
+        blank=True
+    )
+
+    closing_time = models.TimeField(
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.name

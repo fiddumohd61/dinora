@@ -92,7 +92,14 @@ def add_to_cart(request, food_id):
         messages.error(request, "This item is currently out of stock.")
 
         return redirect('restaurant_detail', id=food.restaurant.id)
+    # ==========================================
+    # Check Restaurant Status
+    # ==========================================
 
+    if not food.restaurant.is_open:
+        messages.error(request, "This restaurant is currently closed.")
+
+        return redirect('restaurant_detail', id=food.restaurant.id)
     cart, created = Cart.objects.get_or_create(user=request.user)
 
     cart_item, created = CartItem.objects.get_or_create(

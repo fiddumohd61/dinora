@@ -19,6 +19,7 @@
     {% for food in foods %}
 
     <div class="menu-card">
+
         <img src="{{ food.image.url }}" class="menu-img">
 
         <h3>{{ food.name }}</h3>
@@ -27,7 +28,13 @@
 
         <h4>₹{{ food.price }}</h4>
 
-        {% if food.is_available %}
+        {% if not restaurant.is_open %}
+
+        <button class="out-stock-btn" disabled>
+            Restaurant Closed
+        </button>
+
+        {% elif food.is_available %}
 
         <a href="{% url 'add_to_cart' food.id %}" class="add-cart-btn">
             Add To Cart
