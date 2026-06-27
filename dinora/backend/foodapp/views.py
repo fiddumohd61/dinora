@@ -4,20 +4,35 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Restaurant, FoodItem, Cart, CartItem, Order, OrderItem, Review
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
+<<<<<<< HEAD
+=======
+from accounts.decorators import customer_required
+from django.contrib.auth.models import User
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
 
+@customer_required
 def home(request):
-    restaurants = Restaurant.objects.all()
-    foods = FoodItem.objects.all()
 
     context = {
+<<<<<<< HEAD
         "restaurants": restaurants,
         "foods": foods,
     }
 
     return render(request, "foodapp/index.html", context)
 
+=======
+        "total_orders": Order.objects.count(),
+        "total_customers": User.objects.count(),
+        "total_restaurants": Restaurant.objects.count(),
+        "average_delivery": 30,
+    }
 
+    return render(request, "foodapp/index.html", context)
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
+
+@customer_required
 def menu(request):
     query = request.GET.get("q")
 
@@ -30,6 +45,10 @@ def menu(request):
 
     return render(request, "foodapp/menu.html", context)
 
+<<<<<<< HEAD
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def search(request):
 
     query = request.GET.get("q", "")
@@ -54,19 +73,53 @@ def search(request):
         "foodapp/search_results.html",
         context
     )
+<<<<<<< HEAD
 
 def about(request):
     return render(request, "foodapp/about.html")
 
+=======
+@customer_required
+def about(request):
+    return render(request, "foodapp/about.html")
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
+@customer_required
 def contact(request):
     return render(request, "foodapp/contact.html")
+<<<<<<< HEAD
 
+def restaurants(request):
+
+    restaurant_list = Restaurant.objects.all()
+=======
+@customer_required
 def restaurants(request):
 
     restaurant_list = Restaurant.objects.all()
 
     context = {
+        "restaurants": restaurant_list,
+    }
+
+    return render(
+        request,
+        "foodapp/restaurants.html",
+        context
+    )
+
+@customer_required
+def restaurant_detail(request, id):
+
+    restaurant = get_object_or_404(Restaurant, id=id)
+
+    foods = FoodItem.objects.filter(restaurant=restaurant)
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
+
+    reviews = Review.objects.filter(restaurant=restaurant).order_by("-created_at")
+    review_count = reviews.count()
+    context = {
+<<<<<<< HEAD
         "restaurants": restaurant_list,
     }
 
@@ -94,11 +147,25 @@ def restaurant_detail(request, id):
 
     return render(request, "foodapp/restaurant_detail.html", context)
 
+=======
+        "restaurant": restaurant,
+        "foods": foods,
+        "reviews": reviews,
+        "review_count": review_count,
+    }
 
+    return render(request, "foodapp/restaurant_detail.html", context)
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
+
+@customer_required
 def offers(request):
     return render(request, "foodapp/offers.html")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def cart(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
@@ -115,7 +182,11 @@ def cart(request):
     }
     return render(request, "foodapp/cart.html", context)
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def add_to_cart(request, food_id):
 
@@ -147,7 +218,11 @@ def add_to_cart(request, food_id):
 
     return redirect("cart")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def increase_quantity(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
@@ -156,7 +231,11 @@ def increase_quantity(request, item_id):
 
     return redirect("cart")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def decrease_quantity(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
@@ -169,7 +248,11 @@ def decrease_quantity(request, item_id):
 
     return redirect("cart")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def remove_item(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
@@ -177,7 +260,11 @@ def remove_item(request, item_id):
 
     return redirect("cart")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def place_order(request):
 
@@ -198,7 +285,11 @@ def place_order(request):
 
     return redirect("order_success")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def order_history(request):
     orders = Order.objects.filter(user=request.user).order_by("-created_at")
@@ -208,10 +299,17 @@ def order_history(request):
     }
 
     return render(request, "foodapp/order_history.html", context)
+<<<<<<< HEAD
 
 @login_required(login_url='login')
 def order_details(request, order_id):
 
+=======
+@customer_required
+@login_required(login_url='login')
+def order_details(request, order_id):
+
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
     order = get_object_or_404(
         Order,
         id=order_id,
@@ -232,17 +330,29 @@ def order_details(request, order_id):
         'foodapp/order_details.html',
         context
     )
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def checkout(request):
     return render(request, "foodapp/checkout.html")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url="login")
 def order_success(request):
     return render(request, "foodapp/order_success.html")
 
+<<<<<<< HEAD
 
+=======
+@customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 @login_required(login_url='login')
 def write_review(request, order_id):
 

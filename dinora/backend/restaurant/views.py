@@ -5,6 +5,7 @@ from django.db.models import Sum, Count
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import date
+<<<<<<< HEAD
 
 
 @login_required(login_url='login')
@@ -15,6 +16,68 @@ def dashboard(request):
     if restaurant is None:
         messages.error(request, "No restaurant is linked to your account.")
         return redirect("home")
+=======
+from django.contrib.auth import authenticate, login,logout
+from .decorators import restaurant_owner_required
+
+
+def restaurant_login(request):
+    
+    
+    
+    if request.user.is_authenticated:
+
+        if Restaurant.objects.filter(owner=request.user).exists():
+            return redirect("restaurant_dashboard")
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+
+            if Restaurant.objects.filter(owner=user).exists():
+
+                login(request, user)
+
+                return redirect("restaurant_dashboard")
+
+            else:
+
+                messages.error(
+                    request,
+                    "You are not registered as a restaurant owner."
+                )
+
+        else:
+
+            messages.error(
+                request,
+                "Invalid username or password."
+            )
+
+    return render(
+        request,
+        "restaurant/login.html"
+    )
+@restaurant_owner_required    
+def restaurant_logout(request):
+    logout(request)
+    messages.success(request, "Logged out successfully.")
+    return redirect("restaurant_login")
+
+@restaurant_owner_required
+def dashboard(request):
+
+    restaurant = Restaurant.objects.get(owner=request.user)
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
     # ==========================================
     # Dashboard Statistics
@@ -30,9 +93,15 @@ def dashboard(request):
 
     total_orders = orders.count()
 
+<<<<<<< HEAD
     total_revenue = orders.aggregate(
         Sum("total_amount")
     )["total_amount__sum"] or 0
+=======
+    total_revenue = (
+        orders.aggregate(Sum("total_amount"))["total_amount__sum"] or 0
+    )
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
     pending_orders = orders.filter(
         status="Pending"
@@ -58,9 +127,15 @@ def dashboard(request):
 
     today_orders_count = today_orders.count()
 
+<<<<<<< HEAD
     today_revenue = today_orders.aggregate(
         Sum("total_amount")
     )["total_amount__sum"] or 0
+=======
+    today_revenue = (
+        today_orders.aggregate(Sum("total_amount"))["total_amount__sum"] or 0
+    )
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
     total_reviews = Review.objects.filter(
         restaurant=restaurant
@@ -84,6 +159,10 @@ def dashboard(request):
     # ==========================================
 
     context = {
+<<<<<<< HEAD
+=======
+        "restaurant": restaurant,
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
         "total_foods": total_foods,
         "total_orders": total_orders,
         "total_revenue": total_revenue,
@@ -102,8 +181,12 @@ def dashboard(request):
         context
     )
 
+<<<<<<< HEAD
 
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def add_food(request):
 
     if request.method == "POST":
@@ -131,7 +214,11 @@ def add_food(request):
     return render(request, "restaurant/add_food.html", context)
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def view_foods(request):
 
     restaurant = get_object_or_404(Restaurant, owner=request.user)
@@ -143,7 +230,11 @@ def view_foods(request):
     return render(request, "restaurant/view_foods.html", context)
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def edit_food(request, id):
 
     food = get_object_or_404(FoodItem, id=id, restaurant__owner=request.user)
@@ -166,7 +257,11 @@ def edit_food(request, id):
     return render(request, "restaurant/edit_food.html", context)
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def delete_food(request, id):
 
     food = get_object_or_404(FoodItem, id=id, restaurant__owner=request.user)
@@ -178,7 +273,11 @@ def delete_food(request, id):
     return redirect("view_foods")
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def toggle_stock(request, id):
 
     food = get_object_or_404(FoodItem, id=id, restaurant__owner=request.user)
@@ -189,8 +288,12 @@ def toggle_stock(request, id):
     messages.success(request, "Food stock status updated successfully.")
     return redirect("view_foods")
 
+<<<<<<< HEAD
 
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def customer_orders(request):
 
     restaurant = get_object_or_404(Restaurant, owner=request.user)
@@ -206,7 +309,11 @@ def customer_orders(request):
     return render(request, "restaurant/customer_orders.html", context)
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def update_order_status(request, id):
 
     order = get_object_or_404(
@@ -222,7 +329,11 @@ def update_order_status(request, id):
     return redirect("customer_orders")
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def toggle_restaurant_status(request):
 
     restaurant = get_object_or_404(Restaurant, owner=request.user)
@@ -234,7 +345,11 @@ def toggle_restaurant_status(request):
     return redirect("restaurant_status")
 
 
+<<<<<<< HEAD
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def restaurant_status(request):
 
     restaurant = get_object_or_404(Restaurant, owner=request.user)
@@ -243,8 +358,12 @@ def restaurant_status(request):
 
     return render(request, "restaurant/restaurant_status.html", context)
 
+<<<<<<< HEAD
 
 @login_required(login_url="login")
+=======
+@restaurant_owner_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def restaurant_profile(request):
 
     restaurant = get_object_or_404(Restaurant, owner=request.user)

@@ -4,24 +4,67 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import UserProfileForm
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+=======
+from foodapp.models import Restaurant
+from accounts.decorators import customer_required
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
 # Create your views here.
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
 
-        user = authenticate(request, username=username, password=password)
+    if request.method == "POST":
+
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
 
         if user is not None:
+<<<<<<< HEAD
             login(request, user)
             if hasattr(user, 'restaurant'):
                 return redirect('restaurant_dashboard')
             return redirect('home')
         else:
             messages.error(request, "Invalid username or password")
+=======
+>>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
-    return render(request, 'accounts/login.html')
+            # Prevent restaurant owners from using customer login
+            if Restaurant.objects.filter(owner=user).exists():
+
+                # Clear any existing authenticated session
+                logout(request)
+
+                messages.warning(
+                    request,
+                    "This account is registered as a restaurant owner. Please use the Restaurant Login page."
+                )
+
+                return redirect("restaurant_login")
+
+            login(request, user)
+
+            messages.success(
+                request,
+                "Welcome back!"
+            )
+
+            return redirect("home")
+
+        else:
+
+            messages.error(
+                request,
+                "Invalid username or password."
+            )
+
+    return render(request, "accounts/login.html")
 
 def logout_view(request):
     logout(request)
