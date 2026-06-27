@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th>Order ID</th>
-            <th>Customer</th>
+            <th>Customer & Items</th>
             <th>Total</th>
             <th>Status</th>
             <th>Update</th>
@@ -24,9 +24,24 @@
 
             <td>DIN{{ order.id }}</td>
 
-            <td>{{ order.user.username }}</td>
+            <td>
+                <strong>{{ order.user.username }}</strong>
 
-            <td>₹{{ order.total_amount }}</td>
+                <br><br>
+
+                {% for item in order.orderitem_set.all %}
+
+                • {{ item.food.name }} × {{ item.quantity }}
+
+                <br>
+
+                {% endfor %}
+
+            </td>
+
+            <td>
+                ₹{{ order.total_amount }}
+            </td>
 
             <td>
                 <span class="status-badge">

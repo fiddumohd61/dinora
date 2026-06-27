@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.validators import (
+    MaxValueValidator,
+    MinValueValidator,
+)
 class Restaurant(models.Model):
 
     owner = models.OneToOneField(
@@ -103,9 +106,47 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     food = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
+    @property
+    def total_price(self):
+        return self.quantity * self.food.price
+
     def __str__(self):
         return self.food.name
+    
+class Review(models.Model):
+    order = models.OneToOneField(
+    Order,
+    on_delete=models.CASCADE,
+    related_name='review',
+    
+    )
+    restaurant = models.ForeignKey(
+        Restaurant,
+        on_delete=models.CASCADE
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    
+
+    rating = models.IntegerField(
+        validators=[
+        MinValueValidator(1),
+        MaxValueValidator(5)
+        ]
+    )
+
+    review = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.restaurant.name}"    

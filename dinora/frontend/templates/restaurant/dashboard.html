@@ -25,6 +25,37 @@
         <h2>{{ pending_orders }}</h2>
         <p>Pending Orders</p>
     </div>
+    <!-- ==========================================
+     Recent Reviews
+    ========================================== -->
+
+    <div class="reviews-section">
+
+        <h2>Recent Customer Reviews</h2>
+
+        {% for review in recent_reviews %}
+
+        <div class="review-card">
+
+            <h4>{{ review.user.username }}</h4>
+
+            <p>⭐ {{ review.rating }}/5</p>
+
+            <p>{{ review.review }}</p>
+
+            <small>
+                {{ review.created_at|date:"d M Y" }}
+            </small>
+
+        </div>
+
+        {% empty %}
+
+        <p>No reviews yet.</p>
+
+        {% endfor %}
+
+    </div>
 
 </div>
 

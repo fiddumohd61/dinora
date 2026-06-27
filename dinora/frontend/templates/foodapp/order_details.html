@@ -1,0 +1,107 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/order_details.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="order-details-container">
+
+    <div class="order-header">
+
+        <h1>Order Details</h1>
+
+        <p>
+            Order ID:
+            <strong>DIN{{ order.id }}</strong>
+        </p>
+
+        <p>
+            Order Date:
+            {{ order.created_at|date:"d M Y, h:i A" }}
+        </p>
+
+        <p>
+            Status:
+            <span class="status">
+                {{ order.status }}
+            </span>
+        </p>
+
+    </div>
+
+    <div class="items-section">
+
+        <h2>Ordered Items</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Food</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for item in order_items %}
+
+                <tr>
+
+                    <td>{{ item.food.name }}</td>
+
+                    <td>{{ item.quantity }}</td>
+
+                    <td>₹{{ item.food.price }}</td>
+
+                    <td>₹{{ item.total_price }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="total-section">
+
+        <h2>
+            Grand Total:
+            ₹{{ order.total_amount }}
+        </h2>
+
+    </div>
+
+    <div class="button-group">
+
+        <a href="{% url 'order_history' %}" class="back-btn">
+            ← Back to Orders
+        </a>
+
+        {% if order.status == "Delivered" %}
+
+            {% if not order.review %}
+
+                <a href="{% url 'write_review' order.id %}" class="review-btn">
+                    Write Review
+                </a>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,8 +1,12 @@
 {% extends 'foodapp/base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/index.css' %}">
+{% endblock %}
+
 {% block content %}
-{% load static %}
+
 
 <!-- HERO SECTION -->
 <section class="hero">
@@ -12,9 +16,9 @@
         <!-- Search Section -->
         <div class="hero-search">
 
-            <form action="{% url 'menu' %}" method="GET">
+            <form action="{% url 'search' %}" method="GET">
 
-                <input type="text" name="q" placeholder="🔍 Search Paradise Biryani, Pizza Hut, KFC...">
+                <input type="text" name="q" placeholder="🔍 Search restaurants or food...">
 
                 <button type="submit" class="search-btn">
                     Search
@@ -87,7 +91,7 @@
     </div>
 
 </section>
-<!-- OFFERS -->
+
 <!-- OFFERS -->
 <section class="offer-section">
     <h2>Today's Special Offers</h2>

@@ -1,16 +1,17 @@
 {% extends 'foodapp/base.html' %}
 {% load static %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'foodapp/css/restaurant_detail.css' %}">
 {% endblock %}
 
 {% block content %}
 
-
-
 <div class="restaurant-header">
     <h1>{{ restaurant.name }}</h1>
-    <p>⭐ {{ restaurant.rating }}</p>
+    <p>⭐ {{ restaurant.rating }}
+         ({{ review_count }} Review{{ review_count|pluralize }})
+    </p>
     <p>🚚 {{ restaurant.delivery_time }}</p>
 </div>
 
@@ -49,6 +50,38 @@
         {% endif %}
 
     </div>
+
+    {% endfor %}
+
+</div>
+
+<!-- ==========================================
+     Customer Reviews
+========================================== -->
+
+<div class="reviews-section">
+
+    <h2>Customer Reviews</h2>
+
+    {% for review in reviews %}
+
+    <div class="review-card">
+
+        <h4>{{ review.user.username }}</h4>
+
+        <p>⭐ {{ review.rating }}/5</p>
+
+        <p>{{ review.review }}</p>
+
+        <small>
+            {{ review.created_at|date:"d M Y" }}
+        </small>
+
+    </div>
+
+    {% empty %}
+
+    <p>No reviews yet.</p>
 
     {% endfor %}
 
