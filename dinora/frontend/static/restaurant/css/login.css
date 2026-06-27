@@ -1,0 +1,90 @@
+/* login.css */
+
+body {
+    background: linear-gradient(135deg, #fff7e6, #ffe8cc);
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    padding: 40px;
+    transition: 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+}
+
+.login-title {
+    color: #ff6b00;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.login-label {
+    color: #444;
+    font-weight: 600;
+}
+
+.login-input {
+    height: 55px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    transition: .3s;
+}
+
+.login-input:focus {
+    border-color: #ff6b00;
+    box-shadow: 0 0 10px rgba(255,107,0,.2);
+}
+
+.login-btn {
+    background: linear-gradient(135deg,#ff9800,#ff6b00);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    height: 55px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg,#ff6b00,#ff4500);
+    transform: translateY(-2px);
+}
+
+.login-link {
+    color: #ff6b00;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    color: #ff4500;
+}
+
+@media(max-width:768px){
+
+    .login-card{
+        padding:25px;
+    }
+
+}
+.forgot-password{
+    text-align: center;   /* use center if you want it centered */
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.forgot-password a{
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.forgot-password a:hover{
+    text-decoration: underline;
+}

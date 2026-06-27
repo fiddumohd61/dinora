@@ -67,26 +67,31 @@
 
     </div>
 </section>
-<!-- STATS -->
+<!-- ==========================================
+     STATS
+========================================== -->
+
 <section class="stats-section">
 
     <div class="stat-card">
-        <h2>500+</h2>
+        <h2 class="counter" data-target="{{ total_orders }}">0</h2>
         <p>Orders Delivered</p>
     </div>
 
     <div class="stat-card">
-        <h2>50+</h2>
+        <h2 class="counter" data-target="{{ total_customers }}">0</h2>
         <p>Happy Customers</p>
     </div>
 
     <div class="stat-card">
-        <h2>3</h2>
+        <h2 class="counter" data-target="{{ total_restaurants }}">0</h2>
         <p>Partner Restaurants</p>
     </div>
 
     <div class="stat-card">
-        <h2>30 Min</h2>
+        <h2>
+            {{ average_delivery }} Min
+        </h2>
         <p>Average Delivery</p>
     </div>
 
@@ -242,4 +247,59 @@
 
     </div>
 </section>
+{% endblock %}
+{% block extra_js %}
+
+<script>
+
+const counters = document.querySelectorAll(".counter");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            counters.forEach(counter => {
+
+                const target = +counter.dataset.target;
+
+                let count = 0;
+
+                const speed = Math.max(1, target / 100);
+
+                const update = () => {
+
+                    if(count < target){
+
+                        count += speed;
+
+                        counter.innerText = Math.ceil(count);
+
+                        requestAnimationFrame(update);
+
+                    }else{
+
+                        counter.innerText = target + "+";
+
+                    }
+
+                };
+
+                update();
+
+            });
+
+            observer.disconnect();
+
+        }
+
+    });
+
+});
+
+observer.observe(document.querySelector(".stats-section"));
+
+</script>
+
 {% endblock %}

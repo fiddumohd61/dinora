@@ -4,20 +4,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Restaurant, FoodItem, Cart, CartItem, Order, OrderItem, Review
 from django.contrib.auth.decorators import login_required
 from .forms import ReviewForm
+from accounts.decorators import customer_required
+from django.contrib.auth.models import User
 
 
+@customer_required
 def home(request):
-    restaurants = Restaurant.objects.all()
-    foods = FoodItem.objects.all()
 
     context = {
-        "restaurants": restaurants,
-        "foods": foods,
+        "total_orders": Order.objects.count(),
+        "total_customers": User.objects.count(),
+        "total_restaurants": Restaurant.objects.count(),
+        "average_delivery": 30,
     }
 
     return render(request, "foodapp/index.html", context)
 
-
+@customer_required
 def menu(request):
     query = request.GET.get("q")
 
@@ -30,6 +33,7 @@ def menu(request):
 
     return render(request, "foodapp/menu.html", context)
 
+@customer_required
 def search(request):
 
     query = request.GET.get("q", "")
@@ -54,14 +58,14 @@ def search(request):
         "foodapp/search_results.html",
         context
     )
-
+@customer_required
 def about(request):
     return render(request, "foodapp/about.html")
 
-
+@customer_required
 def contact(request):
     return render(request, "foodapp/contact.html")
-
+@customer_required
 def restaurants(request):
 
     restaurant_list = Restaurant.objects.all()
@@ -76,7 +80,7 @@ def restaurants(request):
         context
     )
 
-
+@customer_required
 def restaurant_detail(request, id):
 
     restaurant = get_object_or_404(Restaurant, id=id)
@@ -94,11 +98,11 @@ def restaurant_detail(request, id):
 
     return render(request, "foodapp/restaurant_detail.html", context)
 
-
+@customer_required
 def offers(request):
     return render(request, "foodapp/offers.html")
 
-
+@customer_required
 @login_required(login_url="login")
 def cart(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
@@ -115,7 +119,7 @@ def cart(request):
     }
     return render(request, "foodapp/cart.html", context)
 
-
+@customer_required
 @login_required(login_url="login")
 def add_to_cart(request, food_id):
 
@@ -147,7 +151,7 @@ def add_to_cart(request, food_id):
 
     return redirect("cart")
 
-
+@customer_required
 @login_required(login_url="login")
 def increase_quantity(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
@@ -156,7 +160,7 @@ def increase_quantity(request, item_id):
 
     return redirect("cart")
 
-
+@customer_required
 @login_required(login_url="login")
 def decrease_quantity(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
@@ -169,7 +173,7 @@ def decrease_quantity(request, item_id):
 
     return redirect("cart")
 
-
+@customer_required
 @login_required(login_url="login")
 def remove_item(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
@@ -177,7 +181,7 @@ def remove_item(request, item_id):
 
     return redirect("cart")
 
-
+@customer_required
 @login_required(login_url="login")
 def place_order(request):
 
@@ -198,7 +202,7 @@ def place_order(request):
 
     return redirect("order_success")
 
-
+@customer_required
 @login_required(login_url="login")
 def order_history(request):
     orders = Order.objects.filter(user=request.user).order_by("-created_at")
@@ -208,7 +212,7 @@ def order_history(request):
     }
 
     return render(request, "foodapp/order_history.html", context)
-
+@customer_required
 @login_required(login_url='login')
 def order_details(request, order_id):
 
@@ -232,17 +236,17 @@ def order_details(request, order_id):
         'foodapp/order_details.html',
         context
     )
-
+@customer_required
 @login_required(login_url="login")
 def checkout(request):
     return render(request, "foodapp/checkout.html")
 
-
+@customer_required
 @login_required(login_url="login")
 def order_success(request):
     return render(request, "foodapp/order_success.html")
 
-
+@customer_required
 @login_required(login_url='login')
 def write_review(request, order_id):
 

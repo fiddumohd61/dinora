@@ -4,6 +4,12 @@ from . import views
 urlpatterns = [
 
     # ==========================================
+    # Authentication
+    # ==========================================
+
+    path('login/', views.restaurant_login, name='restaurant_login'),
+
+    # ==========================================
     # Dashboard
     # ==========================================
 
