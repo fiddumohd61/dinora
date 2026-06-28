@@ -175,10 +175,11 @@
 
 </section>
 
-<!-- POPULAR FOODS -->
+<!-- ================= TRENDING DISHES ================= -->
+
 <section class="foods">
 
-    <h2 class="section-title">Trending Dishes</h2>
+    <h2 class="section-title">🔥 Trending Dishes</h2>
 
     <div class="food-grid">
 
@@ -202,40 +203,52 @@
 
                 <h3>{{ food.name }}</h3>
 
+                <p class="food-description">
+                    {{ food.description|truncatewords:8 }}
+                </p>
+
                 <p class="restaurant-name">
                     🏪 {{ food.restaurant.name }}
                 </p>
 
-                <p class="food-location">
+                <p class="restaurant-location">
                     📍 {{ food.restaurant.location }}
                 </p>
 
                 <div class="food-meta">
 
-                    <span>
-                        ⭐ {{ food.restaurant.rating }} 🚚 {{ food.restaurant.delivery_time }}
-                    </span>
+                    <div>
+                        ⭐ {{ food.restaurant.rating }}
+                    </div>
 
-                 
+                    <div>
+                        🚚 {{ food.restaurant.delivery_time }}
+                    </div>
 
                 </div>
 
                 <div class="food-footer">
 
-                    <span class="food-price">
+                    <div class="food-price">
                         ₹{{ food.price }}
-                    </span>
+                    </div>
 
                     {% if food.is_available %}
 
-                    <a href="{% url 'add_to_cart' food.id %}" class="add-cart-btn">
-                        <i class="fas fa-cart-plus"></i> Add
+                    <a href="{% url 'add_to_cart' food.id %}" class="add-btn">
+
+                        <i class="fas fa-cart-plus"></i>
+
+                        Add
+
                     </a>
 
                     {% else %}
 
-                    <button class="sold-out-btn" disabled>
+                    <button class="sold-btn" disabled>
+
                         Unavailable
+
                     </button>
 
                     {% endif %}
@@ -248,7 +261,7 @@
 
         {% empty %}
 
-        <p>No popular foods available.</p>
+        <h3>No Trending Dishes Available</h3>
 
         {% endfor %}
 

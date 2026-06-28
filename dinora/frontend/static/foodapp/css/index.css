@@ -186,39 +186,7 @@ background:#e65c00;
 .view-menu-btn:hover{
     background:#e65c00;
 }
-/* FOOD ITEMS */
 
-.food-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    padding:10px 50px;
-}
-
-.food-card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    text-align:center;
-}
-
-.food-card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-}
-
-.food-card h3{
-    margin:10px 0;
-}
-
-.food-card p{
-    color:#ff6600;
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
 /* CATEGORIES */
 .categories{
     padding:60px 8%;
@@ -413,117 +381,147 @@ background:#e65c00;
     background:#e65c00;
 
 }
+/* ================= TRENDING DISHES ================= */
 
-/* ================= POPULAR FOODS ================= */
+.foods{
+    padding:80px 6%;
+    background:#fff8f0;
+}
 
 .food-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:30px;
-}
-.restaurant-name{
-    color:#ff6600;
-    font-size:15px;
-    font-weight:600;
-    margin:6px 0;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
 }
 
-.food-location{
-    color:#777;
-    font-size:14px;
+.food-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.food-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+}
+
+.food-image{
+    position:relative;
+    overflow:hidden;
+}
+
+.food-image img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.food-card:hover .food-image img{
+    transform:scale(1.08);
+}
+
+.popular-badge{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#ff6600;
+    color:#fff;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.food-content{
+    padding:22px;
+}
+
+.food-content h3{
+    font-size:26px;
+    color:#222;
     margin-bottom:8px;
 }
 
-.food-price{
-    color:#222;
-    font-size:20px;
-    font-weight:bold;
+.food-description{
+    color:#666;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:15px;
 }
 
-
-/* FOOD CARD */
-
-.food-card{
-
-    background:white;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,0.12);
-
-    transition:0.3s;
-
-    text-align:center;
-
-}
-
-
-
-.food-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-    0 15px 30px rgba(0,0,0,0.18);
-
-}
-
-
-
-/* IMAGE */
-
-.food-card img{
-
-    width:100%;
-
-    height:230px;
-
-    object-fit:cover;
-
-}
-
-
-
-/* FOOD NAME */
-
-.food-card h3{
-
-    font-size:22px;
-
-    color:#333;
-
-    margin:18px 10px 8px;
-
-    font-weight:600;
-
-}
-
-
-
-/* PRICE */
-
-.food-card p{
-
+.restaurant-name{
     color:#ff6600;
+    font-weight:600;
+    margin-bottom:6px;
+}
 
-    font-size:20px;
+.restaurant-location{
+    color:#777;
+    margin-bottom:18px;
+}
 
-    font-weight:bold;
-
+.food-meta{
+    display:flex;
+    justify-content:space-between;
     margin-bottom:20px;
+    color:#555;
+    font-weight:500;
+}
+
+.food-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.food-price{
+    font-size:28px;
+    font-weight:bold;
+    color:#222;
+}
+
+.add-btn{
+    background:#ff6600;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 22px;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:#e65c00;
+    color:#fff;
+}
+
+.sold-btn{
+    background:#aaa;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+}
+
+@media(max-width:992px){
+
+    .food-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
 
 }
 
+@media(max-width:768px){
 
-/* Add small popular badge effect */
+    .food-grid{
 
-.food-card::before{
+        grid-template-columns:1fr;
 
-    content:"⭐ Popular";
-
-    position:absolute;
+    }
 
 }
