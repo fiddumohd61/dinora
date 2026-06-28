@@ -2,33 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import FoodForm, RestaurantProfileForm
 from foodapp.models import Order, FoodItem, Restaurant, Review
 from django.db.models import Sum, Count
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import date
-<<<<<<< HEAD
-
-
-@login_required(login_url='login')
-def dashboard(request):
-
-    restaurant = Restaurant.objects.filter(owner=request.user).first()
-
-    if restaurant is None:
-        messages.error(request, "No restaurant is linked to your account.")
-        return redirect("home")
-=======
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 from .decorators import restaurant_owner_required
 
 
 def restaurant_login(request):
-    
-    
-    
+
     if request.user.is_authenticated:
 
         if Restaurant.objects.filter(owner=request.user).exists():
             return redirect("restaurant_dashboard")
+
 
     if request.method == "POST":
 
@@ -41,6 +27,7 @@ def restaurant_login(request):
             password=password
         )
 
+
         if user is not None:
 
             if Restaurant.objects.filter(owner=user).exists():
@@ -50,98 +37,101 @@ def restaurant_login(request):
                 return redirect("restaurant_dashboard")
 
             else:
-
                 messages.error(
                     request,
                     "You are not registered as a restaurant owner."
                 )
 
         else:
-
             messages.error(
                 request,
                 "Invalid username or password."
             )
 
+
     return render(
         request,
         "restaurant/login.html"
     )
-@restaurant_owner_required    
+
+
+
+@restaurant_owner_required
 def restaurant_logout(request):
+
     logout(request)
-    messages.success(request, "Logged out successfully.")
+
+    messages.success(
+        request,
+        "Logged out successfully."
+    )
+
     return redirect("restaurant_login")
+
+
 
 @restaurant_owner_required
 def dashboard(request):
 
-    restaurant = Restaurant.objects.get(owner=request.user)
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
+    restaurant = get_object_or_404(
+        Restaurant,
+        owner=request.user
+    )
 
-    # ==========================================
-    # Dashboard Statistics
-    # ==========================================
 
     total_foods = FoodItem.objects.filter(
         restaurant=restaurant
     ).count()
 
+
     orders = Order.objects.filter(
         orderitem__food__restaurant=restaurant
     ).distinct()
 
+
     total_orders = orders.count()
 
-<<<<<<< HEAD
-    total_revenue = orders.aggregate(
-        Sum("total_amount")
-    )["total_amount__sum"] or 0
-=======
+
     total_revenue = (
-        orders.aggregate(Sum("total_amount"))["total_amount__sum"] or 0
+        orders.aggregate(
+            Sum("total_amount")
+        )["total_amount__sum"] or 0
     )
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
+
 
     pending_orders = orders.filter(
         status="Pending"
     ).count()
 
-    # ==========================================
-    # Recent Reviews
-    # ==========================================
 
     recent_reviews = Review.objects.filter(
         restaurant=restaurant
     ).order_by("-created_at")[:5]
 
-    # ==========================================
-    # Restaurant Analytics
-    # ==========================================
 
     today = date.today()
+
 
     today_orders = orders.filter(
         created_at__date=today
     )
 
+
     today_orders_count = today_orders.count()
 
-<<<<<<< HEAD
-    today_revenue = today_orders.aggregate(
-        Sum("total_amount")
-    )["total_amount__sum"] or 0
-=======
-    today_revenue = (
-        today_orders.aggregate(Sum("total_amount"))["total_amount__sum"] or 0
-    )
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 
+    today_revenue = (
+        today_orders.aggregate(
+            Sum("total_amount")
+        )["total_amount__sum"] or 0
+    )
     total_reviews = Review.objects.filter(
         restaurant=restaurant
     ).count()
 
+
     average_rating = restaurant.rating
+
 
     best_selling_food = (
         FoodItem.objects.filter(
@@ -154,15 +144,9 @@ def dashboard(request):
         .first()
     )
 
-    # ==========================================
-    # Context
-    # ==========================================
 
     context = {
-<<<<<<< HEAD
-=======
         "restaurant": restaurant,
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
         "total_foods": total_foods,
         "total_orders": total_orders,
         "total_revenue": total_revenue,
@@ -175,211 +159,363 @@ def dashboard(request):
         "best_selling_food": best_selling_food,
     }
 
+
     return render(
         request,
         "restaurant/dashboard.html",
         context
     )
 
-<<<<<<< HEAD
 
-@login_required(login_url="login")
-=======
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def add_food(request):
 
     if request.method == "POST":
-        form = FoodForm(request.POST, request.FILES)
+
+        form = FoodForm(
+            request.POST,
+            request.FILES
+        )
+
 
         if form.is_valid():
 
             food = form.save(commit=False)
 
-            restaurant = get_object_or_404(Restaurant, owner=request.user)
+
+            restaurant = get_object_or_404(
+                Restaurant,
+                owner=request.user
+            )
+
 
             food.restaurant = restaurant
 
             food.save()
 
-            messages.success(request, "Food added successfully.")
 
-            return redirect("restaurant_dashboard")
+            messages.success(
+                request,
+                "Food added successfully."
+            )
+
+
+            return redirect(
+                "restaurant_dashboard"
+            )
+
 
     else:
+
         form = FoodForm()
 
-    context = {"form": form}
 
-    return render(request, "restaurant/add_food.html", context)
+    context = {
+        "form": form
+    }
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+    return render(
+        request,
+        "restaurant/add_food.html",
+        context
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def view_foods(request):
 
-    restaurant = get_object_or_404(Restaurant, owner=request.user)
-
-    foods = FoodItem.objects.filter(restaurant=restaurant)
-
-    context = {"foods": foods}
-
-    return render(request, "restaurant/view_foods.html", context)
+    restaurant = get_object_or_404(
+        Restaurant,
+        owner=request.user
+    )
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+    foods = FoodItem.objects.filter(
+        restaurant=restaurant
+    )
+
+
+    context = {
+        "foods": foods
+    }
+
+
+    return render(
+        request,
+        "restaurant/view_foods.html",
+        context
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def edit_food(request, id):
 
-    food = get_object_or_404(FoodItem, id=id, restaurant__owner=request.user)
+    food = get_object_or_404(
+        FoodItem,
+        id=id,
+        restaurant__owner=request.user
+    )
+
 
     if request.method == "POST":
-        form = FoodForm(request.POST, request.FILES, instance=food)
+
+        form = FoodForm(
+            request.POST,
+            request.FILES,
+            instance=food
+        )
+
 
         if form.is_valid():
+
             form.save()
 
-            messages.success(request, "Food updated successfully.")
 
-            return redirect("view_foods")
+            messages.success(
+                request,
+                "Food updated successfully."
+            )
+
+
+            return redirect(
+                "view_foods"
+            )
+
 
     else:
-        form = FoodForm(instance=food)
 
-    context = {"form": form}
+        form = FoodForm(
+            instance=food
+        )
 
-    return render(request, "restaurant/edit_food.html", context)
+
+    context = {
+        "form": form
+    }
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+    return render(
+        request,
+        "restaurant/edit_food.html",
+        context
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def delete_food(request, id):
 
-    food = get_object_or_404(FoodItem, id=id, restaurant__owner=request.user)
+    food = get_object_or_404(
+        FoodItem,
+        id=id,
+        restaurant__owner=request.user
+    )
+
 
     food.delete()
 
-    messages.success(request, "Food deleted successfully.")
 
-    return redirect("view_foods")
+    messages.success(
+        request,
+        "Food deleted successfully."
+    )
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+    return redirect(
+        "view_foods"
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def toggle_stock(request, id):
 
-    food = get_object_or_404(FoodItem, id=id, restaurant__owner=request.user)
+    food = get_object_or_404(
+        FoodItem,
+        id=id,
+        restaurant__owner=request.user
+    )
+
 
     food.is_available = not food.is_available
 
     food.save()
-    messages.success(request, "Food stock status updated successfully.")
-    return redirect("view_foods")
 
-<<<<<<< HEAD
 
-@login_required(login_url="login")
-=======
+    messages.success(
+        request,
+        "Food stock status updated successfully."
+    )
+
+
+    return redirect(
+        "view_foods"
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def customer_orders(request):
 
-    restaurant = get_object_or_404(Restaurant, owner=request.user)
+    restaurant = get_object_or_404(
+        Restaurant,
+        owner=request.user
+    )
+
 
     orders = (
-        Order.objects.filter(orderitem__food__restaurant=restaurant)
+        Order.objects.filter(
+            orderitem__food__restaurant=restaurant
+        )
         .distinct()
         .order_by("-created_at")
     )
 
-    context = {"orders": orders}
 
-    return render(request, "restaurant/customer_orders.html", context)
+    context = {
+        "orders": orders
+    }
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+    return render(
+        request,
+        "restaurant/customer_orders.html",
+        context
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def update_order_status(request, id):
 
     order = get_object_or_404(
-        Order, id=id, orderitem__food__restaurant__owner=request.user
+        Order,
+        id=id,
+        orderitem__food__restaurant__owner=request.user
     )
+
 
     if request.method == "POST":
 
-        order.status = request.POST.get("status")
+        order.status = request.POST.get(
+            "status"
+        )
 
         order.save()
-        messages.success(request, "Order status updated successfully.")
-    return redirect("customer_orders")
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+        messages.success(
+            request,
+            "Order status updated successfully."
+        )
+
+
+    return redirect(
+        "customer_orders"
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def toggle_restaurant_status(request):
 
-    restaurant = get_object_or_404(Restaurant, owner=request.user)
+    restaurant = get_object_or_404(
+        Restaurant,
+        owner=request.user
+    )
+
 
     restaurant.is_open = not restaurant.is_open
 
     restaurant.save()
-    messages.success(request, "Restaurant status updated successfully.")
-    return redirect("restaurant_status")
 
 
-<<<<<<< HEAD
-@login_required(login_url="login")
-=======
+    messages.success(
+        request,
+        "Restaurant status updated successfully."
+    )
+
+
+    return redirect(
+        "restaurant_status"
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def restaurant_status(request):
 
-    restaurant = get_object_or_404(Restaurant, owner=request.user)
+    restaurant = get_object_or_404(
+        Restaurant,
+        owner=request.user
+    )
 
-    context = {"restaurant": restaurant}
 
-    return render(request, "restaurant/restaurant_status.html", context)
+    context = {
+        "restaurant": restaurant
+    }
 
-<<<<<<< HEAD
 
-@login_required(login_url="login")
-=======
+    return render(
+        request,
+        "restaurant/restaurant_status.html",
+        context
+    )
+
+
+
 @restaurant_owner_required
->>>>>>> 4100230d7a29bf55f73751799d0f967a35e0743a
 def restaurant_profile(request):
 
-    restaurant = get_object_or_404(Restaurant, owner=request.user)
+    restaurant = get_object_or_404(
+        Restaurant,
+        owner=request.user
+    )
+
 
     if request.method == "POST":
 
-        form = RestaurantProfileForm(request.POST, request.FILES, instance=restaurant)
+        form = RestaurantProfileForm(
+            request.POST,
+            request.FILES,
+            instance=restaurant
+        )
+
 
         if form.is_valid():
+
             form.save()
-            messages.success(request, "Restaurant profile updated successfully.")
-            return redirect("restaurant_profile")
+
+
+            messages.success(
+                request,
+                "Restaurant profile updated successfully."
+            )
+
+
+            return redirect(
+                "restaurant_profile"
+            )
+
+
     else:
 
-        form = RestaurantProfileForm(instance=restaurant)
+        form = RestaurantProfileForm(
+            instance=restaurant
+        )
 
-    context = {"form": form}
 
-    return render(request, "restaurant/restaurant_profile.html", context)
+    context = {
+        "form": form
+    }
+
+
+    return render(
+        request,
+        "restaurant/restaurant_profile.html",
+        context
+    )

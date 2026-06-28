@@ -1,0 +1,44 @@
+.terms-card{
+
+    border-radius:25px;
+    background:white;
+    padding:40px;
+}
+
+
+.terms-card h1{
+
+    color:#ff6b00;
+    font-weight:700;
+
+}
+
+
+.terms-card h4{
+
+    color:#ff9800;
+    margin-top:25px;
+    font-weight:600;
+
+}
+
+
+.terms-card p{
+
+    color:#555;
+    line-height:1.8;
+    font-size:16px;
+
+}
+
+
+.terms-card .btn{
+
+    background:linear-gradient(135deg,#ff9800,#ff6b00);
+    border:none;
+    color:white;
+    padding:12px 30px;
+    border-radius:15px;
+    font-weight:600;
+
+}

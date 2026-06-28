@@ -1,0 +1,89 @@
+{% extends 'foodapp/base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'accounts/css/terms.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <div class="card shadow p-5 terms-card">
+
+        <h1 class="text-center mb-4">
+            Terms & Conditions
+        </h1>
+
+
+        <p>
+            Welcome to <b>DINORA</b>. By creating an account and using our
+            platform, you agree to the following terms and conditions.
+        </p>
+
+
+        <h4>1. Account Registration</h4>
+
+        <p>
+            Users must provide accurate information during registration.
+            You are responsible for maintaining the security of your account.
+        </p>
+
+
+        <h4>2. Food Ordering</h4>
+
+        <p>
+            Orders placed through DINORA will be processed according to
+            restaurant availability and delivery schedules.
+        </p>
+
+
+        <h4>3. Payment & Cancellation</h4>
+
+        <p>
+            Customers must provide correct payment details.
+            Cancellation policies may vary depending on the restaurant.
+        </p>
+
+
+        <h4>4. User Responsibilities</h4>
+
+        <p>
+            Users should not misuse the platform or provide false information.
+        </p>
+
+
+        <h4>5. Privacy Policy</h4>
+
+        <p>
+            We respect your privacy and protect your personal information.
+        </p>
+
+
+        <h4>6. Contact Us</h4>
+
+        <p>
+            If you have any questions regarding these terms, contact DINORA
+            support.
+        </p>
+
+
+        <div class="text-center mt-4">
+
+            <a href="{% url 'register' %}"
+               class="btn btn-warning">
+                Back to Registration
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}

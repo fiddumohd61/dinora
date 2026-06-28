@@ -1,18 +1,61 @@
-{% extends 'foodapp/base.html' %}
+{% extends "foodapp/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/about.css' %}">
+{% endblock %}
+
 
 {% block content %}
-<section style="padding:50px;">
-    <h1>About Dinora</h1>
 
-    <p>
-        Dinora is a local food delivery platform that connects customers
-        with the best restaurants in the city.
-    </p>
+<section class="about-page">
 
-    <p>
-        Fast Delivery 🚀
-        Quality Food 🍔
-        Affordable Prices 💰
-    </p>
+    <div class="about-box">
+
+        <h1>About Dinora</h1>
+
+        <h3>Your cravings our mission 🍴</h3>
+
+        <p>
+            Dinora is your trusted food delivery platform that connects
+            customers with the best local restaurants.
+        </p>
+
+        <p>
+            We provide fresh food, fast delivery, and an easy ordering
+            experience for everyone.
+        </p>
+
+
+        <div class="features">
+
+            <div class="card">
+                <h2>🍕 Best Restaurants</h2>
+                <p>Explore delicious food from trusted restaurants.</p>
+            </div>
+
+
+            <div class="card">
+                <h2>🚀 Fast Delivery</h2>
+                <p>Get your favourite meals delivered quickly.</p>
+            </div>
+
+
+            <div class="card">
+                <h2>⭐ Quality Service</h2>
+                <p>Your satisfaction is our priority.</p>
+            </div>
+
+        </div>
+
+
+        <a href="/restaurants/" class="btn">
+            Explore Restaurants
+        </a>
+
+    </div>
+
 </section>
+
+
 {% endblock %}

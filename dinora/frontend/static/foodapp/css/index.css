@@ -65,7 +65,10 @@ border-radius:0 50px 50px 0;
 transition:.3s;
 }
 
-.search-btn:hover
+.search-btn:hover{
+background:#e65c00;
+
+}
 
 /* BUTTONS */
 
@@ -86,7 +89,9 @@ padding:14px 30px;
 border-radius:10px;
 }
 
-.hero-btn:hover
+.hero-btn:hover{
+background:#e65c00;
+}
 
 .explore-btn{
     display:inline-block ;
@@ -282,38 +287,41 @@ border-radius:10px;
     color:#555;
     font-size:18px;
 }
-/* OFFERS */
-.offer-section{
-    padding:70px 8%;
-    background:#fff8f5;
-    text-align:center;
-}
 
-.offer-section h2{
-    font-size:40px;
-    color:#222;
-    margin-bottom:40px;
-}
+/* OFFERS SECTION */
 
-.offer-grid{
+.offers-container{
     display:flex;
     justify-content:center;
+    align-items:flex-start;
     gap:30px;
     flex-wrap:wrap;
+    width:100%;
+    padding:50px 8%;
+    background:#fff8f5;
 }
 
+
+/* OFFER CARD */
+
 .offer-card{
-    width:350px;
+    width:320px;
     background:white;
     border-radius:20px;
     overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    transition:0.3s;
+    box-shadow:0 5px 20px rgba(0,0,0,0.12);
+    transition:0.3s ease;
+    text-align:center;
 }
+
 
 .offer-card:hover{
     transform:translateY(-10px);
 }
+
+
+
+/* IMAGE */
 
 .offer-card img{
     width:100%;
@@ -321,48 +329,189 @@ border-radius:10px;
     object-fit:cover;
 }
 
+
+
+/* TITLE */
+
 .offer-card h3{
     color:#ff6600;
-    margin-top:20px;
-    font-size:28px;
+    font-size:26px;
+    margin:20px 10px 10px;
 }
+
+
+
+/* DESCRIPTION */
 
 .offer-card p{
     color:#555;
-    margin:10px 0;
+    font-size:16px;
+    padding:0 20px;
+    line-height:1.5;
 }
 
-.offer-card h4{
-    color:#333;
-    margin-bottom:20px;
+
+
+/* COUPON */
+
+.coupon-code{
+
+    width:160px;
+    margin:20px auto;
+
+    padding:12px;
+
+    border:2px dashed #ff6600;
+
+    background:#fff7f0;
+
+    color:#ff6600;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    border-radius:10px;
+
 }
+
+
+
+/* BUTTON */
 
 .offer-btn{
+
     background:#ff6600;
+
     color:white;
+
     border:none;
-    padding:12px 30px;
+
+    padding:12px 35px;
+
+    margin-bottom:25px;
+
     border-radius:8px;
-    cursor:pointer;
+
     font-size:16px;
+
     font-weight:bold;
-    margin-bottom:20px;
+
+    cursor:pointer;
+
     transition:0.3s;
+
 }
 
+
 .offer-btn:hover{
+
     background:#e65c00;
+
 }
-.coupon-code{
-    width:160px;
-    margin:15px auto;
-    padding:12px;
-    border:2px dashed #ff6600;
-    background:#fff7f0;
-    color:#ff6600;
-    font-size:20px;
-    font-weight:bold;
+
+/* ================= POPULAR FOODS ================= */
+
+.food-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4, 1fr);
+
+    gap:25px;
+
+    padding:40px 8%;
+
+    background:#fff8f5;
+
+}
+
+
+
+/* FOOD CARD */
+
+.food-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.12);
+
+    transition:0.3s;
+
     text-align:center;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+
+
+.food-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 15px 30px rgba(0,0,0,0.18);
+
+}
+
+
+
+/* IMAGE */
+
+.food-card img{
+
+    width:100%;
+
+    height:200px;
+
+    object-fit:cover;
+
+}
+
+
+
+/* FOOD NAME */
+
+.food-card h3{
+
+    font-size:22px;
+
+    color:#333;
+
+    margin:18px 10px 8px;
+
+    font-weight:600;
+
+}
+
+
+
+/* PRICE */
+
+.food-card p{
+
+    color:#ff6600;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+
+}
+
+
+/* Add small popular badge effect */
+
+.food-card::before{
+
+    content:"⭐ Popular";
+
+    position:absolute;
+
 }
