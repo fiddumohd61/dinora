@@ -138,62 +138,123 @@
 </section>
 <!-- Popular Restaurants -->
 <section class="restaurants">
+
     <h2 class="section-title">Popular Restaurants</h2>
 
     <div class="restaurant-grid">
 
-        <div class="restaurant-grid">
+        {% for restaurant in restaurants %}
 
-            {% for restaurant in restaurants %}
+        <div class="restaurant-card">
 
-            <div class="restaurant-card">
-                <img src="{{ restaurant.image.url }}">
-                <h3>{{ restaurant.name }}</h3>
+            <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
 
-                <p class="rating">
-                    ⭐ {{ restaurant.rating }}
-                </p>
+            <h3>{{ restaurant.name }}</h3>
 
-                <p>
-                    {{ restaurant.delivery_time }}
-                </p>
+            <p class="restaurant-location">
+                📍 {{ restaurant.location|default:"Hyderabad" }}
+            </p>
 
-                <a href="{% url 'restaurant_detail' restaurant.id %}" class="view-menu-btn">
-                    View Menu
-                </a>
+            <p class="rating">
+                ⭐ {{ restaurant.rating }}
+            </p>
 
-            </div>
+            <p>
+                🚚 {{ restaurant.delivery_time }}
+            </p>
 
-            {% endfor %}
+            <a href="{% url 'restaurant_detail' restaurant.id %}" class="view-menu-btn">
+                View Menu
+            </a>
 
         </div>
+
+        {% endfor %}
+
+    </div>
+
 </section>
 
 <!-- POPULAR FOODS -->
 <section class="foods">
-    <h2 class="section-title">Popular Foods</h2>
+
+    <h2 class="section-title">Trending Dishes</h2>
 
     <div class="food-grid">
 
         {% for food in popular_foods %}
 
         <div class="food-card">
-            <img src="{{ food.image.url }}">
-            <h3>{{ food.name }}</h3>
-            <p>₹{{ food.price }}</p>
+
+            <div class="food-image">
+
+                <img src="{{ food.image.url }}" alt="{{ food.name }}">
+
+                {% if food.is_popular %}
+                <span class="popular-badge">
+                    ⭐ Bestseller
+                </span>
+                {% endif %}
+
+            </div>
+
+            <div class="food-content">
+
+                <h3>{{ food.name }}</h3>
+
+                <p class="restaurant-name">
+                    🏪 {{ food.restaurant.name }}
+                </p>
+
+                <p class="food-location">
+                    📍 {{ food.restaurant.location }}
+                </p>
+
+                <div class="food-meta">
+
+                    <span>
+                        ⭐ {{ food.restaurant.rating }} 🚚 {{ food.restaurant.delivery_time }}
+                    </span>
+
+                 
+
+                </div>
+
+                <div class="food-footer">
+
+                    <span class="food-price">
+                        ₹{{ food.price }}
+                    </span>
+
+                    {% if food.is_available %}
+
+                    <a href="{% url 'add_to_cart' food.id %}" class="add-cart-btn">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </a>
+
+                    {% else %}
+
+                    <button class="sold-out-btn" disabled>
+                        Unavailable
+                    </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
         </div>
 
         {% empty %}
 
-        <p>No popular foods available</p>
+        <p>No popular foods available.</p>
 
         {% endfor %}
 
     </div>
+
 </section>
-
-
-
 <!-- WHY CHOOSE US -->
 <section class="why-us">
     <h2>Why Choose Dinora?</h2>

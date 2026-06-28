@@ -105,3 +105,15 @@
     cursor:pointer;
     margin-top:20px;
 }
+.restaurant-name{
+    color:#ff6600;
+    font-size:15px;
+    font-weight:600;
+    margin:5px 0 2px;
+}
+
+.restaurant-location{
+    color:#777;
+    font-size:13px;
+    margin-bottom:8px;
+}

@@ -14,9 +14,11 @@ def home(request):
     restaurants = Restaurant.objects.all()
 
     # Get only popular foods for Popular Foods section
-    popular_foods = Food.objects.filter(
-        is_popular=True
-    )
+    popular_foods = FoodItem.objects.filter(
+    is_popular=True,
+    is_available=True,
+    restaurant__is_open=True
+    ).select_related("restaurant")
 
     # Get all active offers
     offers = Offer.objects.filter(
@@ -185,9 +187,21 @@ def cart(request):
     for item in cart_items:
         total += item.food.price * item.quantity
 
+    # Fixed Tax
+    tax = 20
+
+    # Delivery Charge
+    delivery_fee = 0
+
+    # Grand Total
+    grand_total = total + tax + delivery_fee
+
     context = {
         "cart_items": cart_items,
         "total": total,
+        "tax": tax,
+        "delivery_fee": delivery_fee,
+        "grand_total": grand_total,
     }
 
     return render(

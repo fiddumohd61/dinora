@@ -36,15 +36,16 @@
 
             <h3>{{ restaurant.name }}</h3>
 
+            <p class="location">
+                📍 {{ restaurant.location|default:"hyderbad" }}
+            </p>
             <p class="info">
                 ⭐ {{ restaurant.rating }}
                 &nbsp; | &nbsp;
                 ⏱ {{ restaurant.delivery_time }}
             </p>
 
-            <p class="location">
-                📍 {{ restaurant.address|default:"Location not available" }}
-            </p>
+           
 
             {% if restaurant.is_open %}
 

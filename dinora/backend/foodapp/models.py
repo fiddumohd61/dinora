@@ -19,7 +19,11 @@ class Restaurant(models.Model):
     delivery_time = models.CharField(max_length=20)
 
     is_open = models.BooleanField(default=True)
-
+    location = models.CharField(
+    max_length=150,
+    blank=True,
+    default=""
+    )
     address = models.TextField(blank=True)
 
     phone = models.CharField(

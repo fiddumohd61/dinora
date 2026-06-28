@@ -15,75 +15,98 @@
 
     <div class="order-card">
 
+        <!-- Header -->
         <div class="order-header">
 
-            <h3>Order #DIN{{ order.id }}</h3>
+            <div class="order-info">
 
-            {% if order.status == 'Pending' %}
+                <h3>Order #DIN{{ order.id }}</h3>
+
+                <p class="restaurant-name">
+                    🏪 {{ order.orderitem_set.first.food.restaurant.name }}
+                </p>
+
+                <p class="restaurant-location">
+                    📍 {{ order.orderitem_set.first.food.restaurant.location }}
+                </p>
+
+            </div>
+
+            <div>
+
+                {% if order.status == 'Pending' %}
                 <span class="status pending">Pending</span>
 
-            {% elif order.status == 'Accepted' %}
+                {% elif order.status == 'Accepted' %}
                 <span class="status accepted">Accepted</span>
 
-            {% elif order.status == 'Preparing' %}
+                {% elif order.status == 'Preparing' %}
                 <span class="status preparing">Preparing</span>
 
-            {% elif order.status == 'Out for Delivery' %}
+                {% elif order.status == 'Out for Delivery' %}
                 <span class="status out-for-delivery">Out for Delivery</span>
 
-            {% elif order.status == 'Delivered' %}
+                {% elif order.status == 'Delivered' %}
                 <span class="status delivered">Delivered</span>
 
-            {% elif order.status == 'Cancelled' %}
+                {% elif order.status == 'Cancelled' %}
                 <span class="status cancelled">Cancelled</span>
 
-            {% endif %}
+                {% endif %}
+
+            </div>
 
         </div>
+
+        <!-- Items -->
 
         <div class="order-details">
 
             {% for item in order.orderitem_set.all %}
 
-                <p>{{ item.food.name }} × {{ item.quantity }}</p>
+            <p>🍽️ {{ item.food.name }} × {{ item.quantity }}</p>
 
             {% endfor %}
 
         </div>
 
+        <!-- Footer -->
+
         <div class="order-footer">
 
-            <div>
-                <strong>Total:</strong>
-                ₹{{ order.total_amount }}
+            <div class="footer-left">
+
+                <p><strong>Total:</strong> ₹{{ order.total_amount }}</p>
+
+                <p><strong>Date:</strong> {{ order.created_at|date:"d M Y" }}</p>
+
             </div>
 
-            <div>
-                <strong>Date:</strong>
-                {{ order.created_at|date:"d M Y" }}
-            </div>
+            <div class="footer-right">
 
-            <a href="{% url 'order_details' order.id %}" class="details-btn">
-                View Details
-            </a>
+                <a href="{% url 'order_details' order.id %}" class="details-btn">
+                    View Details
+                </a>
 
-            {% if order.status == 'Delivered' %}
+                {% if order.status == 'Delivered' %}
 
-                {% if order.review %}
+                    {% if order.review %}
 
                     <button class="track-btn" disabled>
                         ⭐ Review Submitted
                     </button>
 
-                {% else %}
+                    {% else %}
 
                     <a href="{% url 'write_review' order.id %}" class="track-btn">
                         Write Review
                     </a>
 
+                    {% endif %}
+
                 {% endif %}
 
-            {% endif %}
+            </div>
 
         </div>
 
@@ -91,12 +114,13 @@
 
     {% empty %}
 
-        <div class="no-orders">
+    <div class="no-orders">
 
-            <h2>No Orders Yet</h2>
-            <p>Looks like you haven't placed any orders yet.</p>
+        <h2>No Orders Yet</h2>
 
-        </div>
+        <p>Looks like you haven't placed any orders yet.</p>
+
+    </div>
 
     {% endfor %}
 

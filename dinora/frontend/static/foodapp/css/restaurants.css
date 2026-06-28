@@ -118,10 +118,10 @@ body{
     margin-top: 15px;
 }
 
-/* Location */
-.location{
-    color: #777;
-    font-size: 17px;
+.restaurant-location{
+    color:#777;
+    font-size:14px;
+    margin:6px 0;
 }
 
 /* Status */
