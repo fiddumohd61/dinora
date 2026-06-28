@@ -1,34 +1,66 @@
-{% extends 'foodapp/base.html' %}
+{% extends "foodapp/base.html" %}
 {% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/offers.css' %}">
+{% endblock %}
+
+
 
 {% block content %}
 
-<section class="offers-page">
 
-    <h1>Today's Special Offers</h1>
+<h1 class="section-title">Today's Special Offers</h1>
 
-    <div class="offer-grid">
 
-        <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer1.jpg' %}">
-            <h2>50% OFF</h2>
-            <p>On First Order</p>
+<div class="offer-container">
+
+
+    {% for offer in offers %}
+
+
+    <div class="offer-card">
+
+
+        <img src="{{ offer.image.url }}" alt="{{ offer.title }}">
+
+
+        <h3>
+            {{ offer.title }}
+        </h3>
+
+
+        <p>
+            {{ offer.description }}
+        </p>
+
+
+
+        <div class="coupon-code">
+            🎟️ {{ offer.coupon_code }}
         </div>
 
-        <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer2.jpg' %}">
-            <h2>Free Delivery</h2>
-            <p>Above ₹299</p>
-        </div>
 
-        <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer3.jpg' %}">
-            <h2>Buy 1 Get 1</h2>
-            <p>Selected Restaurants</p>
-        </div>
+
+        <button class="offer-btn">
+            Grab Offer
+        </button>
+
 
     </div>
 
-</section>
+
+    {% empty %}
+
+
+    <p>No offers available.</p>
+
+
+    {% endfor %}
+
+
+</div>
+
 
 {% endblock %}

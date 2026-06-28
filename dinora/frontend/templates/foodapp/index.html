@@ -99,39 +99,40 @@
 
 <!-- OFFERS -->
 <section class="offer-section">
-    <h2>Today's Special Offers</h2>
+    <h2 class="section-title">Today's Special Offers</h2>
 
-    <div class="offer-grid">
+    <div class="offers-container">
 
-        <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer1.png' %}">
-            <h3>50% OFF</h3>
-            <p>On First Order</p>
-            <div class="coupon-code">
-                🎟️ DINORA
-            </div>
-            <button class="offer-btn">Grab Offer</button>
-        </div>
+        {% for offer in offers %}
 
         <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer2.png' %}">
-            <h3>Free Delivery</h3>
-            <p>Above ₹299</p>
+
+            <img src="{{ offer.image.url }}" alt="{{ offer.title }}">
+
+
+            <h3>
+                {{ offer.title }}
+            </h3>
+
+
+            <p>
+                {{ offer.description }}
+            </p>
+
+
             <div class="coupon-code">
-                🚚 FREEDEL
+                🎟️ {{ offer.coupon_code }}
             </div>
-            <button class="offer-btn">Grab Offer</button>
+
+
+            <button class="offer-btn">
+                Grab Offer
+            </button>
+
+
         </div>
 
-        <div class="offer-card">
-            <img src="{% static 'foodapp/images/offer3.png'  %}">
-            <h3>Buy 1 Get 1</h3>
-            <p>Selected Restaurants</p>
-            <div class="coupon-code">
-                🍔 BOGO
-            </div>
-            <button class="offer-btn">Grab Offer</button>
-        </div>
+        {% endfor %}
 
     </div>
 </section>
@@ -174,13 +175,17 @@
 
     <div class="food-grid">
 
-        {% for food in foods %}
+        {% for food in popular_foods %}
 
         <div class="food-card">
             <img src="{{ food.image.url }}">
             <h3>{{ food.name }}</h3>
             <p>₹{{ food.price }}</p>
         </div>
+
+        {% empty %}
+
+        <p>No popular foods available</p>
 
         {% endfor %}
 
@@ -252,53 +257,53 @@
 
 <script>
 
-const counters = document.querySelectorAll(".counter");
+    const counters = document.querySelectorAll(".counter");
 
-const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry => {
+        entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+            if (entry.isIntersecting) {
 
-            counters.forEach(counter => {
+                counters.forEach(counter => {
 
-                const target = +counter.dataset.target;
+                    const target = +counter.dataset.target;
 
-                let count = 0;
+                    let count = 0;
 
-                const speed = Math.max(1, target / 100);
+                    const speed = Math.max(1, target / 100);
 
-                const update = () => {
+                    const update = () => {
 
-                    if(count < target){
+                        if (count < target) {
 
-                        count += speed;
+                            count += speed;
 
-                        counter.innerText = Math.ceil(count);
+                            counter.innerText = Math.ceil(count);
 
-                        requestAnimationFrame(update);
+                            requestAnimationFrame(update);
 
-                    }else{
+                        } else {
 
-                        counter.innerText = target + "+";
+                            counter.innerText = target + "+";
 
-                    }
+                        }
 
-                };
+                    };
 
-                update();
+                    update();
 
-            });
+                });
 
-            observer.disconnect();
+                observer.disconnect();
 
-        }
+            }
+
+        });
 
     });
 
-});
-
-observer.observe(document.querySelector(".stats-section"));
+    observer.observe(document.querySelector(".stats-section"));
 
 </script>
 

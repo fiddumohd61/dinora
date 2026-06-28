@@ -7,8 +7,13 @@ from .models import (
     CartItem,
     Order,
     OrderItem,
-    Review
+    Review,
+    Offer,
+    Food
 )
+
+
+
 
 # ==========================================
 # Restaurant
@@ -16,6 +21,7 @@ from .models import (
 
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
+
     list_display = (
         'name',
         'owner',
@@ -39,6 +45,7 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+
     list_display = (
         'name',
     )
@@ -54,6 +61,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(FoodItem)
 class FoodItemAdmin(admin.ModelAdmin):
+
     list_display = (
         'name',
         'restaurant',
@@ -80,6 +88,7 @@ class FoodItemAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
+
     list_display = (
         'id',
         'user',
@@ -96,6 +105,7 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
+
     list_display = (
         'cart',
         'food',
@@ -113,6 +123,7 @@ class CartItemAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+
     list_display = (
         'id',
         'user',
@@ -137,6 +148,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
+
     list_display = (
         'order',
         'food',
@@ -150,6 +162,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
+
     list_display = (
         'user',
         'restaurant',
@@ -165,3 +178,44 @@ class ReviewAdmin(admin.ModelAdmin):
         'user__username',
         'restaurant__name'
     )
+
+
+# ==========================================
+# Offer
+# ==========================================
+
+@admin.register(Offer)
+class OfferAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'title',
+        'description',
+        'coupon_code',
+        'is_active'
+    )
+
+    list_filter = (
+        'is_active',
+    )
+
+    search_fields = (
+        'title',
+        'coupon_code',
+    )
+
+# ==========================================
+# Food
+# ==========================================
+
+@admin.register(Food)
+class FoodAdmin(admin.ModelAdmin):
+
+    list_display = [
+        'name',
+        'price',
+        'is_popular'
+    ]
+
+    list_filter = [
+        'is_popular'
+    ]

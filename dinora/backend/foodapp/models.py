@@ -61,9 +61,11 @@ class FoodItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
+    is_popular = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='foods/')
     is_available = models.BooleanField(default=True)
+    
 
     def __str__(self):
         return self.name
@@ -150,3 +152,35 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.restaurant.name}"    
+    
+class Offer(models.Model):
+
+    title = models.CharField(max_length=100)
+
+    description = models.CharField(max_length=200)
+
+    coupon_code = models.CharField(max_length=50)
+
+    image = models.ImageField(
+        upload_to="offers/"
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+
+    def __str__(self):
+        return self.title
+    
+# models.py
+
+class Food(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='foods/')
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    is_popular = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name

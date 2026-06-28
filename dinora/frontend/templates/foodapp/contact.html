@@ -1,11 +1,81 @@
-{% extends 'foodapp/base.html' %}
+{% extends "foodapp/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/contact.css' %}">
+{% endblock %}
 
 {% block content %}
-<section style="padding:50px;">
-    <h1>Contact Us</h1>
 
-    <p>📞 +91 9876543210</p>
-    <p>📧 dinora@gmail.com</p>
-    <p>📍 Hyderabad, India</p>
+<section class="contact-section">
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h1>Contact Us</h1>
+
+            <p class="contact-text">
+                Have questions or need help?  
+                We are always ready to assist you.
+            </p>
+
+            <div class="info-box">
+                <span>📞</span>
+                <div>
+                    <h3>Phone</h3>
+                    <p>+91 6304644279</p>
+                </div>
+            </div>
+
+
+            <div class="info-box">
+                <span>📧</span>
+                <div>
+                    <h3>Email</h3>
+                    <p>dinora@gmail.com</p>
+                </div>
+            </div>
+
+
+            <div class="info-box">
+                <span>📍</span>
+                <div>
+                    <h3>Address</h3>
+                    <p>Hyderabad, India</p>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="contact-form">
+
+            <h2>Send Message</h2>
+
+            <form>
+
+                <input type="text" placeholder="Your Name">
+
+                <input type="email" placeholder="Your Email">
+
+                <input type="text" placeholder="Subject">
+
+                <textarea rows="5" placeholder="Your Message"></textarea>
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
 </section>
+
+
 {% endblock %}

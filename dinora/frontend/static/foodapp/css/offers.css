@@ -1,0 +1,184 @@
+/* ==========================================
+   Offers Page
+========================================== */
+
+
+body{
+    background:#fff8f0;
+}
+
+.section-title{
+    text-align:center;
+    margin:20px 0 10px;
+    font-size:38px;
+    color:#222;
+}
+
+/* Offers container */
+
+.offers-container{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+
+/* Offer Card */
+
+.offer-card{
+
+    background:white;
+
+    width:320px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+
+    margin:25px;
+
+    display:inline-block;
+
+    vertical-align:top;
+
+    transition:0.3s;
+
+    
+
+}
+
+
+
+.offer-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,0.18);
+
+}
+
+
+
+/* Offer Image */
+
+.offer-card img{
+
+    width:100%;
+
+    height:200px;
+
+    object-fit:cover;
+
+}
+
+
+
+/* Content */
+
+.offer-card h3{
+
+    color:#ff6600;
+
+    font-size:24px;
+
+    margin:20px 20px 10px;
+
+    text-align:center;
+
+}
+
+
+
+.offer-card p{
+
+    color:#666;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+    margin:0 20px 15px;
+
+    text-align:center;
+
+}
+
+
+
+/* Coupon */
+
+.coupon-code{
+
+    background:#fff3e6;
+
+    border:2px dashed #ff6600;
+
+    color:#ff6600;
+
+    font-weight:bold;
+
+    padding:12px;
+
+    margin:15px 20px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+}
+
+
+
+/* Button */
+
+.offer-btn{
+
+    width:calc(100% - 40px);
+
+    margin:10px 20px 25px;
+
+    padding:12px;
+
+    background:#ff6600;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+
+.offer-btn:hover{
+
+    background:#e65c00;
+
+}
+
+
+
+/* Mobile Responsive */
+
+@media(max-width:768px){
+
+    .offer-card{
+
+        width:90%;
+
+        margin:20px auto;
+
+        display:block;
+
+    }
+
+}
