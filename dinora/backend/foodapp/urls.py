@@ -36,6 +36,7 @@ urlpatterns = [
     # ==========================================
 
     path('checkout/', views.checkout, name='checkout'),
+    path("clear-cart/",views.clear_cart,name="clear_cart"),
     path('place-order/', views.place_order, name='place_order'),
     path('order-success/', views.order_success, name='order_success'),
     path('order-history/', views.order_history, name='order_history'),
@@ -46,5 +47,8 @@ urlpatterns = [
     # ==========================================
 
     path('write-review/<int:order_id>/', views.write_review, name='write_review'),
+    
+    
+    path("partner/",views.partner,name="partner"),
 
 ]

@@ -388,36 +388,27 @@ def customer_orders(request):
     )
 
 
-
 @restaurant_owner_required
 def update_order_status(request, id):
 
     order = get_object_or_404(
-        Order,
-        id=id,
-        orderitem__food__restaurant__owner=request.user
+        Order.objects.filter(
+            orderitem__food__restaurant__owner=request.user
+        ).distinct(),
+        id=id
     )
-
 
     if request.method == "POST":
 
-        order.status = request.POST.get(
-            "status"
-        )
-
+        order.status = request.POST.get("status")
         order.save()
-
 
         messages.success(
             request,
             "Order status updated successfully."
         )
 
-
-    return redirect(
-        "customer_orders"
-    )
-
+    return redirect("customer_orders")
 
 
 @restaurant_owner_required

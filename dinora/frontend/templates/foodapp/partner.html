@@ -1,0 +1,149 @@
+{% extends 'foodapp/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'foodapp/css/partner.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="partner-hero">
+
+    <div class="partner-content">
+
+        <h1>Partner With <span>Dinora</span></h1>
+
+        <p>
+            Grow your restaurant business with Dinora and reach thousands of hungry customers every day.
+            Increase your online orders, expand your customer base, and manage everything through a simple
+            restaurant dashboard.
+        </p>
+
+        <a href="{% url 'restaurant_login' %}" class="partner-btn">
+            Restaurant Login
+        </a>
+
+        <p class="partner-note">
+            <strong>Don't have a restaurant account?</strong><br>
+            Contact the Dinora team to get your restaurant verified and onboarded.
+        </p>
+
+    </div>
+
+    <div class="partner-image">
+
+        <img src="{% static 'foodapp/images/partner.png' %}" alt="Partner">
+
+    </div>
+
+</section>
+
+
+<section class="benefits">
+
+    <h2>Why Partner With Dinora?</h2>
+
+    <div class="benefit-grid">
+
+        <div class="benefit-card">
+            <div class="icon">📈</div>
+            <h3>Increase Sales</h3>
+            <p>Reach more customers and grow your restaurant revenue.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="icon">🍽️</div>
+            <h3>More Orders</h3>
+            <p>Receive online orders from customers near your restaurant.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="icon">⚡</div>
+            <h3>Easy Dashboard</h3>
+            <p>Manage menu, orders and restaurant status effortlessly.</p>
+        </div>
+
+        <div class="benefit-card">
+            <div class="icon">💰</div>
+            <h3>Higher Revenue</h3>
+            <p>Expand your business and maximize your daily earnings.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="steps">
+
+    <h2>How It Works</h2>
+
+    <div class="steps-grid">
+
+        <div class="step-card">
+            <h1>1</h1>
+            <h3>Login</h3>
+            <p>Access your restaurant account.</p>
+        </div>
+
+        <div class="step-card">
+            <h1>2</h1>
+            <h3>Add Menu</h3>
+            <p>Upload delicious dishes and prices.</p>
+        </div>
+
+        <div class="step-card">
+            <h1>3</h1>
+            <h3>Receive Orders</h3>
+            <p>Accept customer orders in real time.</p>
+        </div>
+
+        <div class="step-card">
+            <h1>4</h1>
+            <h3>Grow Business</h3>
+            <p>Deliver food and earn more every day.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="partner-bottom">
+
+    <h2>Ready to Grow Your Restaurant?</h2>
+
+    <p>
+        Join Dinora and reach more customers in your city.
+        Our team will help you get started.
+    </p>
+
+    <a href="{% url 'restaurant_login' %}" class="partner-btn">
+        Restaurant Login
+    </a>
+
+    <div class="partner-info">
+
+        <h3>Restaurant Onboarding</h3>
+
+        <p>
+            We currently onboard restaurants manually to ensure quality and authenticity.
+        </p>
+
+        <p>
+            Contact our team using the details below and we'll create your restaurant account after verification.
+        </p>
+
+        <hr>
+
+        <p><strong>📧 Email:</strong> support@dinora.com</p>
+
+        <p><strong>📞 Phone:</strong> +91 6304644279</p>
+
+        <p><strong>🕒 Support Hours:</strong> Monday – Saturday | 9:00 AM – 6:00 PM</p>
+
+    </div>
+
+</section>
+
+{% endblock %}

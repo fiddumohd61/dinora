@@ -43,4 +43,5 @@ urlpatterns = [
     path('toggle-restaurant-status/', views.toggle_restaurant_status, name='toggle_restaurant_status'),
     path('restaurant-profile/', views.restaurant_profile, name='restaurant_profile'),
 
+    
 ]

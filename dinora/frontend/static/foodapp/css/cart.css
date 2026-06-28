@@ -95,15 +95,22 @@
 }
 
 .checkout-btn{
+    display:block;
     width:100%;
-    padding:15px;
-    background:#f59e0b;
+    padding:14px;
+    background:#ff6600;
     color:white;
-    border:none;
+    text-align:center;
+    text-decoration:none;
     border-radius:10px;
+    font-weight:600;
     font-size:16px;
-    cursor:pointer;
     margin-top:20px;
+    transition:.3s;
+}
+
+.checkout-btn:hover{
+    background:#e65c00;
 }
 .restaurant-name{
     color:#ff6600;
@@ -116,4 +123,23 @@
     color:#777;
     font-size:13px;
     margin-bottom:8px;
+}
+
+.clear-cart-btn{
+    display:block;
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    background:#dc3545;
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+    font-size:16px;
+    transition:.3s;
+}
+
+.clear-cart-btn:hover{
+    background:#bb2d3b;
 }

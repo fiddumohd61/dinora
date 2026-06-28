@@ -153,39 +153,6 @@ body{
 
 
 
-/* Button */
-
-
-.view-btn{
-
-    display:inline-block;
-
-    margin-top:15px;
-
-    background:#ff6600;
-
-    color:white;
-
-    padding:12px 28px;
-
-    border-radius:10px;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-}
-
-
-
-.view-btn:hover{
-
-    background:#e65c00;
-
-}
-
-
-
 /* Empty Result */
 
 
@@ -230,4 +197,82 @@ body{
 }
 
 
+}
+/* ==========================================
+   Food Action Buttons
+========================================== */
+
+.food-actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+}
+
+.search-view-btn,
+.search-cart-btn{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:48px;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+/* View Restaurant */
+
+.search-view-btn{
+
+    background:#28a745;
+
+    color:#fff;
+}
+
+.search-view-btn:hover{
+
+    background:#218838;
+
+    color:#fff;
+}
+
+/* Add to Cart */
+
+.search-cart-btn{
+
+    background:#ff6600;
+
+    color:#fff;
+
+    border:none;
+
+    cursor:pointer;
+}
+
+.search-cart-btn:hover{
+
+    background:#e65c00;
+
+    color:#fff;
+}
+
+/* Disabled Button */
+
+.search-cart-btn.disabled{
+
+    background:#999;
+
+    cursor:not-allowed;
 }

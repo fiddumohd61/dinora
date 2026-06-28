@@ -8,6 +8,8 @@ from accounts.decorators import customer_required
 from django.contrib.auth.models import User
 
 
+
+
 @customer_required
 def home(request):
 
@@ -51,6 +53,7 @@ def home(request):
         context
     )
 
+
 @customer_required
 def menu(request):
 
@@ -66,6 +69,7 @@ def menu(request):
     }
 
     return render(request, "foodapp/menu.html", context)
+
 
 
 @customer_required
@@ -98,6 +102,7 @@ def search(request):
 
 
 
+
 @customer_required
 def restaurants(request):
 
@@ -112,6 +117,7 @@ def restaurants(request):
         "foodapp/restaurants.html",
         context
     )
+
 
 
 @customer_required
@@ -143,6 +149,7 @@ def restaurant_detail(request, id):
     )
 
 
+
 @customer_required
 def offers(request):
 
@@ -162,9 +169,11 @@ def offers(request):
         context
     )
 
+
 @customer_required
 def about(request):
     return render(request, "foodapp/about.html")
+
 
 @customer_required
 def contact(request):
@@ -211,6 +220,7 @@ def cart(request):
     )
 
 
+
 @customer_required
 @login_required(login_url="login")
 def add_to_cart(request, food_id):
@@ -220,7 +230,12 @@ def add_to_cart(request, food_id):
         id=food_id
     )
 
+    # ==========================================
+    # Check Food Availability
+    # ==========================================
+
     if not food.is_available:
+
         messages.error(
             request,
             "This item is currently out of stock."
@@ -231,7 +246,12 @@ def add_to_cart(request, food_id):
             id=food.restaurant.id
         )
 
+    # ==========================================
+    # Check Restaurant Status
+    # ==========================================
+
     if not food.restaurant.is_open:
+
         messages.error(
             request,
             "This restaurant is currently closed."
@@ -242,10 +262,35 @@ def add_to_cart(request, food_id):
             id=food.restaurant.id
         )
 
+    # ==========================================
+    # Get Cart
+    # ==========================================
 
     cart, created = Cart.objects.get_or_create(
         user=request.user
     )
+
+    # ==========================================
+    # Restrict Cart to One Restaurant
+    # ==========================================
+
+    existing_item = CartItem.objects.filter(cart=cart).first()
+
+    if existing_item:
+
+        if existing_item.food.restaurant != food.restaurant:
+
+            messages.error(
+                request,
+                f"Your cart already contains items from {existing_item.food.restaurant.name}. "
+                "Please clear your cart before ordering from another restaurant."
+            )
+
+            return redirect("cart")
+
+    # ==========================================
+    # Add Item to Cart
+    # ==========================================
 
     cart_item, created = CartItem.objects.get_or_create(
         cart=cart,
@@ -253,10 +298,40 @@ def add_to_cart(request, food_id):
     )
 
     if not created:
+
         cart_item.quantity += 1
+
         cart_item.save()
 
+    messages.success(
+        request,
+        f"{food.name} added to cart."
+    )
+
     return redirect("cart")
+
+
+@customer_required
+@login_required(login_url="login")
+def clear_cart(request):
+
+    cart = Cart.objects.filter(
+        user=request.user
+    ).first()
+
+    if cart:
+
+        CartItem.objects.filter(
+            cart=cart
+        ).delete()
+
+        messages.success(
+            request,
+            "Your cart has been cleared successfully."
+        )
+
+    return redirect("cart")
+
 
 
 @customer_required
@@ -273,6 +348,7 @@ def increase_quantity(request, item_id):
     cart_item.save()
 
     return redirect("cart")
+
 
 
 @customer_required
@@ -294,6 +370,7 @@ def decrease_quantity(request, item_id):
     return redirect("cart")
 
 
+
 @customer_required
 @login_required(login_url="login")
 def remove_item(request, item_id):
@@ -307,6 +384,7 @@ def remove_item(request, item_id):
     cart_item.delete()
 
     return redirect("cart")
+
 
 
 @customer_required
@@ -345,6 +423,8 @@ def place_order(request):
 
     return redirect("order_success")
 
+
+
 @customer_required
 @login_required(login_url="login")
 def order_history(request):
@@ -362,6 +442,7 @@ def order_history(request):
         "foodapp/order_history.html",
         context
     )
+
 
 
 @customer_required
@@ -390,6 +471,7 @@ def order_details(request, order_id):
     )
 
 
+
 @customer_required
 @login_required(login_url="login")
 def checkout(request):
@@ -400,6 +482,7 @@ def checkout(request):
     )
 
 
+
 @customer_required
 @login_required(login_url="login")
 def order_success(request):
@@ -408,6 +491,7 @@ def order_success(request):
         request,
         "foodapp/order_success.html"
     )
+
 
 
 @customer_required
@@ -491,6 +575,7 @@ def write_review(request, order_id):
     )
 
 
+
 @customer_required
 def offers(request):
 
@@ -509,3 +594,9 @@ def offers(request):
         "foodapp/offers.html",
         context
     )
+    
+def partner(request):
+    return render(
+        request,
+        "foodapp/partner.html"
+    )    
